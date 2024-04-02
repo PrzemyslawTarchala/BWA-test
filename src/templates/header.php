@@ -1,4 +1,6 @@
+
 <?php 
+    include_once("../../Utils/debug.php");
     session_start(); 
 ?>
 
@@ -12,4 +14,13 @@
     <link rel="stylesheet" href="./style.css" type="text/css">
 </head>
 <body>
-    <h2>Header</h2>
+
+		<?php if(isset($_SESSION['logged'])  && $_SESSION['logged'] === false ) :  ?>
+    		
+
+		<?php else: ?>
+        
+            <a href="../../Controller/UserController.php?q=logout">Logout</a></br>
+
+		<?php endif; ?>
+

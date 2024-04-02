@@ -48,12 +48,16 @@ class UserController
 		}
 	}
 
+	public function logout(): void
+{
+		$_SESSION['logged'] = false; 
+		header("Location: ../../index.php");
+	}
+
 }
 
-//Utworzenie obiektu
 $init = new UserController;
 
-//Sprawdzenie czy użytkownik wysłał dane:
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	switch($_POST['type']){
 		case 'register':
@@ -64,6 +68,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			break;
 		default:
 			redirect("../../index.php");
+	} 
+} elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
+	switch ($_GET['q']) {
+			case 'logout':
+					$init->logout();
+					break;
+			default:
+					redirect("../index.php");
 	}
-
 }

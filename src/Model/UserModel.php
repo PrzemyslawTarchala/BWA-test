@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+session_start();
+
 class UserModel
 {
 	private $conn;
@@ -32,10 +34,11 @@ class UserModel
 
 
 		if($result != 0){
+			$_SESSION['logged'] = true;
 			return true;
 		} else {
 			return false;
-		}
+		} 
 	}
 
 	private function createConnectionToDB(): void

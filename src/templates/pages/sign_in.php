@@ -1,6 +1,8 @@
 <?php 
   include_once("../header.php");
 ?>
+	<h3>Sign in</h3>
+
 	<form action="../../Controller/UserController.php" method="post">
 	
 	<input type="hidden" name="type" value="login">
@@ -18,9 +20,10 @@
 			<button type="submit">Sign in</button>
 		</div>
 
-		<a href="/?action=registration">Registration here</a>
+		<a href="register.php">Registration here</a>
 
 	</form>
+
 <?php
 	include_once("../footer.php");
 ?>
