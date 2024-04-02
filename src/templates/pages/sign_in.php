@@ -1,7 +1,10 @@
 <?php 
-  include_once("../header.php");
+	include_once("../header.php");
+	include_once("../../Auxiliary/Auxiliary.php");
 ?>
 	<h3>Sign in</h3>
+
+	<?php AuxiliaryMethod::display()?>
 
 	<form action="../../Controller/UserController.php" method="post">
 	

@@ -23,6 +23,36 @@ class UserModel
     $stmt->execute();
 	}
 
+	public function isNewUsernameAvailiabity(string $newUsername): bool
+	{
+		$query = "SELECT users.username FROM users WHERE username = :username";
+		$stmt = $this->conn->prepare($query);
+		$stmt->bindParam(':username', $newUsername);
+		$stmt->execute();
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($result == ''){
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function isNewEmailAvailiabity(string $newEmail): bool
+	{
+		$query = "SELECT users.email FROM users WHERE email = :email";
+		$stmt = $this->conn->prepare($query);
+		$stmt->bindParam(':email', $newEmail);
+		$stmt->execute();
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($result == ''){
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public function login(array $loginData): bool
 	{
 		$query = "SELECT users.id FROM users WHERE username = :username AND password = :password";
@@ -32,9 +62,7 @@ class UserModel
 		$stmt->execute();
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
 		if($result != 0){
-			$_SESSION['logged'] = true;
 			return true;
 		} else {
 			return false;

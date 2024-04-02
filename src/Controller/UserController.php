@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+session_start();
+
 include_once("../Model/UserModel.php");
+include_once("../Auxiliary/Auxiliary.php");
 
 class UserController
 {
@@ -25,13 +28,13 @@ class UserController
 			'comfirmPassword' => $_POST['confirmPassword']
 		];
 
-
+		$this->registerValidation($registerData);
 		$this->User->register($registerData);
 	}
 
 	public function login(): void 
 	{
-		
+
 		echo 'Login';
 
 		$loginData = [
@@ -40,20 +43,58 @@ class UserController
 		];
 
 		if($this->User->login($loginData)) {
-			echo '222';
+			$_SESSION['logged'] = true;
 			header("Location: ../templates/pages/menu.php");
 		} else {
-			echo 'L333';
-			header("Location: ../../index.php");
+			$_SESSION['message'] = "Wrong username or password.";
+			header("Location: ../templates/pages/sign_in.php");
 		}
 	}
 
 	public function logout(): void
-{
+	{
 		$_SESSION['logged'] = false; 
 		header("Location: ../../index.php");
 	}
 
+	private function registerValidation(array $registerData): void
+	{
+		if(strlen($registerData['username']) < 1){
+			$_SESSION['message'] = "Login too short. Minimum 3 characters.";
+			header("Location: ../templates/pages/register.php");
+			exit();
+		}
+
+		if($this->User->isNewUsernameAvailiabity($registerData['username'])){
+			$_SESSION['message'] = "Login already exists";
+			header("Location: ../templates/pages/register.php");
+			exit();
+		} 
+
+		if(!strpos($registerData['email'], '@') || !strpos($registerData['email'], '.')){
+			$_SESSION['message'] = "Wrong email";
+			header("Location: ../templates/pages/register.php");
+			exit();
+		}
+
+		if($this->User->isNewEmailAvailiabity($registerData['email'])){
+			$_SESSION['message'] = "Email already exists";
+			header("Location: ../templates/pages/register.php");
+			exit();
+		} 
+
+		if(strlen($registerData['password']) < 6){
+			$_SESSION['message'] = "Password is too short. Minimum 6 characters.";
+			header("Location: ../templates/pages/register.php");
+			exit();
+		} 
+
+		if($registerData['password'] != $registerData['confirmPassword']){
+			$_SESSION['message'] = "Passwords are diffrent";
+			header("Location: ../templates/pages/register.php");
+			exit();
+		} 
+	}
 }
 
 $init = new UserController;
