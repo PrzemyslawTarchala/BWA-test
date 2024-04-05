@@ -2,6 +2,13 @@
 	include_once("../header.php");
 ?>
 
-<?php
+<section class="home">
+	<div class="text">
+			<h1>Dashboard</h1>
+	</div>
+</section>
 
-echo "Udalo Ci się zalogowac do menu";
+<?php
+	include_once("../footer.php");
+?>
+
