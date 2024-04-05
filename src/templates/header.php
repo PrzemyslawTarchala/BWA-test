@@ -1,4 +1,3 @@
-
 <?php 
     include_once("../../Utils/debug.php");
     session_start(); 
@@ -11,16 +10,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web App</title>
-    <link rel="stylesheet" href="./style.css" type="text/css">
+    <link rel="stylesheet" href="/public/style.css">
+    <!-- <link rel="stylesheet" href="../style.css" type="text/css"> -->
 </head>
 <body>
 
-		<?php if(isset($_SESSION['logged'])  && $_SESSION['logged'] === false ) :  ?>
-    		
+		<?php //if(isset($_SESSION['logged'])  && $_SESSION['logged'] === false ) :  ?>
 
-		<?php else: ?>
+		<?php //else: ?>
         
-            <a href="../../Controller/UserController.php?q=logout">Logout</a></br>
+            <!-- <a href="../../Controller/UserController.php?q=logout">Logout</a></br> -->
 
-		<?php endif; ?>
+		<?php //endif; ?>
 

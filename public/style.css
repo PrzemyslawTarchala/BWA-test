@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+	font-family: 'Poppins', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root{
+	--body-color: #E4E9F7;
+	--sidebar-color: #FFF;
+	--primary-color: #695CFE;
+	--primary-color-light: #F6F5FF;
+	--toggle-color: #DDD;
+	--text-color: #707070;
+
+	--tran-02: all 0.2s ease;
+	--tran-03: all 0.3s ease;
+	--tran-04: all 0.4s ease;
+	--tran-05: all 0.5s ease;
+}
+
+body{
+	height: 100vh;
+	background: var(--body-color);
+	transition: var(--tran-05);
+}
+
+/* ---- Login - register section ---- */
+
+.login-register{
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+/* .login-register .message-window{
+	
+} */
+
+.input-window{
+	height: 430px;
+	width: 400px;
+	padding: 20px 10px;
+	background: var(--sidebar-color);
+	border: 1px solid darkgrey;
+	border-radius: 15px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	gap: 10px;
+}
+
+.input-window .logo-section{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.input-window .logo-section img{
+	width: 50px;
+	height: 50px;
+}
+
+.input-window .input-section{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 25px;
+	gap: 15px;
+}
+
+.input-section h2{
+	margin-bottom: 15px;
+}
+
+.input-section .login-form{
+	width: 100%;
+}
+
+.input-section .login-form input{
+	height: 40px;
+	width: 70%;
+	margin: 8px;
+	border: 1px solid darkgrey;
+	border-radius: 15px;
+	text-indent: 10px;
+}
+
+.input-section .login-form input::placeholder{
+	position: absolute;
+	left: 2px;
+}
+
+.input-section .login-form .remeber{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.input-section .login-form .remeber input{
+	cursor: pointer;
+	height: 22px;
+	width: 22px;
+}
+
+.input-section .login-form .button{
+	width: 100%;
+	margin-top: 5px;
+}
+
+.input-section .login-form button{
+	height: 40px;
+	width: 70%;
+	border: 1px solid darkgrey;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+.input-section .login-form .button input{
+	height: 40px;
+	width: 70%;
+	border: 1px solid darkgrey;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
