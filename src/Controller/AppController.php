@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+session_start();
+
 require_once("src/View.php");
 
 class AppController
@@ -15,7 +17,12 @@ class AppController
 	
 	public function run(): void 
 	{
-		$this->view->render("sign_in");
+		if($_SESSION['logged']){
+			$this->view->render("menu");
+		} else {
+			$this->view->render("sign_in");
+		}
+		
 	}
 
 }
