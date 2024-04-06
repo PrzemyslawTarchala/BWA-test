@@ -44,7 +44,7 @@ class UserController
 
 		if($this->User->login($loginData)) {
 			$_SESSION['logged'] = true;
-			header("Location: ../templates/pages/menu.php");
+			header("Location: ../templates/pages/overview.php");
 		} else {
 			$_SESSION['message'] = "Wrong username or password.";
 			header("Location: ../templates/pages/sign_in.php");

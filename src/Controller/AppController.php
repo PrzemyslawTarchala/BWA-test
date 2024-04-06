@@ -18,7 +18,7 @@ class AppController
 	public function run(): void 
 	{
 		if($_SESSION['logged']){
-			$this->view->render("menu");
+			$this->view->render("overview");
 		} else {
 			$this->view->render("sign_in");
 		}

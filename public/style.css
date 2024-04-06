@@ -361,7 +361,9 @@ body.dark .switch::before{
 	left: 24px;
 }
 
-.home{
+/* Menu content */
+
+/* .menu-page{
 	position: relative;
 	height: 100vh;
 	left: 250px;
@@ -370,14 +372,113 @@ body.dark .switch::before{
 	transition: var(--tran-05);
 }
 
-.home .text{
+.menu-page .text{
 	font-size: 30px;
 	font-weight: 500;
 	color: var(--text-color);
 	padding: 8px 40px;
 }
 
-.sidebar.close ~ .home{
+.sidebar.close ~ .menu-page{
 	left: 88px;
 	width: calc(100% - 250px);
+} */
+
+.overwiev{
+	position: fixed;
+	height: 95%;
+	width: 93%;
+	/* width: calc(100%-250px); */
+	background: var(--body-color);
+	transition: var(--tran-05);
+	margin: 20px 20px 20px 110px;
+	/* border: 1px solid #E4E9F7; */
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.overwiev .overview-content{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.overwiev .overview-content .theme{
+	width: 95%;
+	display: flex; 
+	justify-content: space-between;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+
+.overwiev .overview-content .charts{
+	border: 1px solid black;
+	width: 95%;
+	height: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+}
+
+.overwiev .overview-content .charts .monthly-balance{
+	width: 100%;
+	height: 45%;
+	display: flex;
+	border: 1px solid black;
+	justify-content: space-around;
+}
+
+.overwiev .overview-content .charts .revenue, .expense {
+	width: 45%;
+	border: 1px solid black;
+}
+
+.overwiev .overview-content .charts .current-year{
+	width: 95%;
+	height: 50%;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid black;
+}
+
+.overwiev .overview-content .charts .current-year .text{
+	width: 100%;
+	height: 10%;
+	border: 1px solid black;
+}
+
+.overwiev .overview-content .charts .current-year .plot-balance{
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+.overwiev .overview-content .charts .current-year .plot-balance .plot{
+	width: 70%;
+	height: 100%;
+	border: 1px solid black;
+} 
+
+.overwiev .overview-content .charts .current-year .plot-balance .balance{
+	width: 30%;
+	height: 100%;
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+} 
+
+.overwiev .overview-content .charts .current-year .plot-balance .balance .revenue-year, .expense-year, .summary-year{
+	width: 60%;
+	height: 25%;
+	border: 1px solid black;
+	border-radius: 10px;
 }

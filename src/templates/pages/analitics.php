@@ -4,7 +4,7 @@
 
 <section class="home">
 	<div class="text">
-			<h1>Dashboard</h1>
+			<h1>Analitics</h1>
 	</div>
 </section>
 

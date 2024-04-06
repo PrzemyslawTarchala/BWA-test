@@ -21,7 +21,7 @@
         <?php else: ?>
         
         <nav class="sidebar close">
-			<header>
+		    <header>
 				<div class="image-text">
 					<span class="image">
 						<img src="/img/logo.png" alt="">
@@ -34,16 +34,15 @@
 				</div>
 
 				<i class='bx bx-chevron-right toggle'></i>
-
 			</header>
 
                 <div class="menu-bar">
                     <div class="menu">
                         <ul class="menu-links">
                             <li class="nav-link">
-                                <a href="#">
+                                <a href="overview.php">
                                     <i class='bx bx-home-alt icon' ></i>
-                                    <span class="text nav-text">Dashboard</span>
+                                    <span class="text nav-text">Overview</span>
                                 </a>
                             </li>
 
@@ -55,14 +54,14 @@
                             </li>
 
                             <li class="nav-link">
-                                <a href="#">
+                                <a href="addExpense.php">
                                     <i class='bx bx-minus icon' ></i>
                                     <span class="text nav-text">Add expense</span>
                                 </a>
                             </li>
 
                             <li class="nav-link">
-                                <a href="#">
+                                <a href="analitics.php">
                                     <i class='bx bx-pie-chart-alt icon' ></i>
                                     <span class="text nav-text">Analitics</span>
                                 </a>
@@ -93,5 +92,5 @@
                         </li>
                     </div>
                 </div>
-            </nav>		
+        </nav>		
         <?php endif; ?>
