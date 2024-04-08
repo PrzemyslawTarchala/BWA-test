@@ -2,9 +2,9 @@
 	include_once("../header.php");
 ?>
 
-<section class="overwiev">
+<section class="overview-page">
 
-	<div class="overview-content">
+	<div class="page-content">
 		
 		<div class="theme">
 			

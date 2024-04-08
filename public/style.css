@@ -124,12 +124,12 @@ body.dark .search-box input{
 	width: 22px;
 }
 
-.input-section .login-form .button{
+.input-window .input-section .login-form .button{
 	width: 100%;
 	margin-top: 5px;
 }
 
-.input-section .login-form button{
+.input-window .input-section .login-form button{
 	height: 40px;
 	width: 70%;
 	border: 1px solid darkgrey;
@@ -137,7 +137,7 @@ body.dark .search-box input{
 	cursor: pointer;
 }
 
-.input-section .login-form .button input{
+.input-window.input-section .login-form .button input{
 	height: 40px;
 	width: 70%;
 	border: 1px solid darkgrey;
@@ -384,7 +384,7 @@ body.dark .switch::before{
 	width: calc(100% - 250px);
 } */
 
-.overwiev{
+.overview-page {
 	position: fixed;
 	height: 95%;
 	width: 93%;
@@ -397,7 +397,7 @@ body.dark .switch::before{
 	border-radius: 5px;
 }
 
-.overwiev .overview-content{
+.overview-page .page-content{
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -407,7 +407,7 @@ body.dark .switch::before{
 	gap: 20px;
 }
 
-.overwiev .overview-content .theme{
+.overview-page .page-content .theme{
 	width: 95%;
 	display: flex; 
 	justify-content: space-between;
@@ -415,7 +415,7 @@ body.dark .switch::before{
 	border-radius: 10px;
 }
 
-.overwiev .overview-content .charts{
+.overview-page .page-content .charts{
 	border: 1px solid black;
 	width: 95%;
 	height: 90%;
@@ -426,7 +426,7 @@ body.dark .switch::before{
 	gap: 15px;
 }
 
-.overwiev .overview-content .charts .monthly-balance{
+.overview-page .page-content .charts .monthly-balance{
 	width: 100%;
 	height: 45%;
 	display: flex;
@@ -434,12 +434,12 @@ body.dark .switch::before{
 	justify-content: space-around;
 }
 
-.overwiev .overview-content .charts .revenue, .expense {
+.overview-page .page-content .charts .revenue, .expense {
 	width: 45%;
 	border: 1px solid black;
 }
 
-.overwiev .overview-content .charts .current-year{
+.overview-page .page-content .charts .current-year{
 	width: 95%;
 	height: 50%;
 	display: flex;
@@ -447,25 +447,25 @@ body.dark .switch::before{
 	border: 1px solid black;
 }
 
-.overwiev .overview-content .charts .current-year .text{
+.overview-page .page-content .charts .current-year .text{
 	width: 100%;
 	height: 10%;
 	border: 1px solid black;
 }
 
-.overwiev .overview-content .charts .current-year .plot-balance{
+.overview-page .page-content .charts .current-year .plot-balance{
 	width: 100%;
 	height: 100%;
 	display: flex;
 }
 
-.overwiev .overview-content .charts .current-year .plot-balance .plot{
+.overview-page .page-content .charts .current-year .plot-balance .plot{
 	width: 70%;
 	height: 100%;
 	border: 1px solid black;
 } 
 
-.overwiev .overview-content .charts .current-year .plot-balance .balance{
+.overview-page .page-content .charts .current-year .plot-balance .balance{
 	width: 30%;
 	height: 100%;
 	border: 1px solid black;
@@ -476,9 +476,237 @@ body.dark .switch::before{
 	align-items: center;
 } 
 
-.overwiev .overview-content .charts .current-year .plot-balance .balance .revenue-year, .expense-year, .summary-year{
+.overview-page .page-content .charts .current-year .plot-balance .balance .revenue-year, .expense-year, .summary-year{
 	width: 60%;
 	height: 25%;
 	border: 1px solid black;
 	border-radius: 10px;
+}
+
+/* ---- Add revenue page ---- */
+
+.revenue-page{
+	position: fixed;
+	height: 95%;
+	width: 93%;
+	background: var(--body-color);
+	transition: var(--tran-05);
+	margin: 20px 20px 20px 110px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.revenue-page .page-content{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.revenue-page .page-content .theme{
+	width: 95%;
+	display: flex; 
+	justify-content: space-between;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+
+.revenue-page .page-content .revenue-data{
+	position: relative;
+	border: 1px solid black;
+	width: 95%;
+	height: 90%;
+}
+
+.revenue-page .page-content .revenue-data form{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+}
+
+.revenue-page .page-content .revenue-data form .date, .amount, .category, .comment, .revenue-page  .button{
+	display: flex;
+	align-items: center;
+	border: 1px solid black;
+	border-radius: 20px;
+}
+
+.revenue-page .page-content .revenue-data form .amount, .date{
+	width: 100%;
+	height: 13%;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid red;
+	border-radius: 20px;
+}
+
+.revenue-page .page-content .revenue-data form .amount .header{
+	width: 100%;
+	height: 50%;
+	padding-left: 10px;
+	background-color: rgb(184, 194, 222);
+	border: 1px solid red;
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.revenue-page .page-content .revenue-data form .amount .input{
+	width: 100%;
+	height: 50%;
+	padding-left: 10px;
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+.revenue-page .page-content .revenue-data form .amount .input .text{
+	width: 10%;
+}
+
+.revenue-page .page-content .revenue-data form .date .header{
+	width: 100%;
+	height: 50%;
+	padding-left: 10px;
+	background-color: rgb(184, 194, 222);
+	border: 1px solid red;
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.revenue-page .page-content .revenue-data form .date .input{
+	width: 100%;
+	height: 50%;
+	padding-left: 10px;
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+.revenue-page .page-content .revenue-data form .date .input .text{
+	width: 10%;
+}
+
+
+
+
+
+
+
+.revenue-page .page-content .revenue-data form .date{
+	width: 100%;
+	height: 13%;
+}
+
+.revenue-page .page-content .revenue-data .category{
+	width: 100%;
+	height: 20%;
+}
+
+.revenue-page .page-content .revenue-data .comment{
+	width: 100%;
+	height: 30%;
+}
+
+.revenue-page .page-content .revenue-data .button{
+	width: 100%;
+	height: 10%;
+}
+
+
+
+
+/* ---- Add Expense page ---- */
+
+.expense-page{
+	position: fixed;
+	height: 95%;
+	width: 93%;
+	background: var(--body-color);
+	transition: var(--tran-05);
+	margin: 20px 20px 20px 110px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.expense-page .page-content{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.expense-page .page-content .theme{
+	width: 95%;
+	display: flex; 
+	justify-content: space-between;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+
+.expense-page .page-content .expense-data{
+	border: 1px solid black;
+	width: 95%;
+	height: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+}
+
+
+/* ---- Analitics page ---- */
+
+.analitics-page{
+	position: fixed;
+	height: 95%;
+	width: 93%;
+	background: var(--body-color);
+	transition: var(--tran-05);
+	margin: 20px 20px 20px 110px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.analitics-page .page-content{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.analitics-page .page-content .theme{
+	width: 95%;
+	display: flex; 
+	justify-content: space-between;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+
+.analitics-page .page-content .analitics-content{
+	border: 1px solid black;
+	width: 95%;
+	height: 90%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
 }
