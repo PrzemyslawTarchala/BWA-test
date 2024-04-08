@@ -47,17 +47,35 @@
 						<div class="header">
 							<h3>Category</h3>
 						</div>
-						<div>
-							
+						<div class="input">
+							<div class="text">
+								<span>Choose category: </span>
+							</div>
+							<ul>
+								<li><input type="radio" id="" name="Salary" value=""> Salary</li>
+								<li><input type="radio" id="" name="Salary" value=""> Bank interest</li>
+								<li><input type="radio" id="" name="Salary" value=""> Allegro</li>
+								<li><input type="radio" id="" name="Salary" value=""> Other</li>
+							</ul>
 						</div>
 					</div>
 
 					<div class="comment">
-
+						<div class="header">
+							<h3>Comment</h3>
+						</div>
+						<div class="input">
+							<input type="text" placeholder="Put comment here">
+						</div>
 					</div>
 
-					<div class="button">
-
+					<div class="submit">
+						<div class="comfirm">
+							<button type="Submit">Comfirm</button>
+						</div>
+						<div class="cancel">
+							<button type="Cancel">Cancel</button>
+						</div>
 					</div>
 				</form>
 		</div>
