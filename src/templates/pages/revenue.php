@@ -4,13 +4,11 @@
 
 <section class="revenue-page">
 	<div class="page-content">
-			
+		
 		<div class="theme">
-			
 			<div class="text">
 				<h2>Add Revenue</h2>
 			</div>
-
 		</div>
 		
 		<div class="revenue-data">
@@ -24,7 +22,7 @@
 								<span>Enter the amount:</span>
 							</div>
 							<div>
-								<input type="number">
+								<input type="float">
 							</div>
 						</div>
 					</div>
@@ -65,7 +63,7 @@
 							<h3>Comment</h3>
 						</div>
 						<div class="input">
-							<input type="text" placeholder="Put comment here">
+							<textarea name="comment" id="comment" cols="30" rows="10" placeholder="Put some comment here ..."></textarea>
 						</div>
 					</div>
 

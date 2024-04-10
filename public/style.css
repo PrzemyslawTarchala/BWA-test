@@ -137,7 +137,7 @@ body.dark .search-box input{
 	cursor: pointer;
 }
 
-.input-window.input-section .login-form .button input{
+.input-window .input-section .login-form .button input{
 	height: 40px;
 	width: 70%;
 	border: 1px solid darkgrey;
@@ -158,6 +158,7 @@ body.dark .search-box input{
 	background: var(--sidebar-color);
 	transition: var(--tran-04);
 	z-index: 100;
+	border-right: 1px solid gray;
 }
 
 .sidebar.close{
@@ -486,14 +487,13 @@ body.dark .switch::before{
 /* ---- Add revenue page ---- */
 
 .revenue-page{
-	position: fixed;
-	height: 95%;
 	width: 93%;
-	background: var(--body-color);
-	transition: var(--tran-05);
+	height: 85%;
+	background: rgb(243, 250, 252);
 	margin: 20px 20px 20px 110px;
 	border: 1px solid black;
-	border-radius: 5px;
+	border-radius: 25px;
+	transition: var(--tran-05);
 }
 
 .revenue-page .page-content{
@@ -501,31 +501,31 @@ body.dark .switch::before{
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
-	gap: 20px;
+	gap: 20px;	
 }
 
 .revenue-page .page-content .theme{
 	width: 95%;
+	margin-top: 25px;
 	display: flex; 
 	justify-content: space-between;
-	border: 1px solid black;
-	border-radius: 10px;
+	padding: 2px;
+}
+
+.revenue-page .page-content .theme h2{
+	font-size: 2rem;
 }
 
 .revenue-page .page-content .revenue-data{
-	position: relative;
-	border: 1px solid black;
 	width: 95%;
 	height: 90%;
 }
 
 .revenue-page .page-content .revenue-data form{
-	position: relative;
 	width: 100%;
 	height: 100%;
-	border: 1px solid black;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -535,70 +535,57 @@ body.dark .switch::before{
 .revenue-page .page-content .revenue-data form .date, .amount, .category, .comment, .revenue-page  .submit{
 	display: flex;
 	align-items: center;
-	border: 1px solid black;
 	border-radius: 20px;
+	border: 1px solid grey;
+	transition: 0.4s ease;
 }
 
-.revenue-page .page-content .revenue-data form .amount, .date{
-	width: 100%;
-	height: 13%;
-	display: flex;
-	flex-direction: column;
-	border: 1px solid red;
-	border-radius: 20px;
+.revenue-page .page-content .revenue-data form .date:hover,
+.revenue-page .page-content .revenue-data form .amount:hover,
+.revenue-page .page-content .revenue-data form .category:hover,
+.revenue-page .page-content .revenue-data form .comment:hover{
+	border: 1.7px solid black;
 }
 
-.revenue-page .page-content .revenue-data form .amount .header{
+.revenue-page .page-content .revenue-data form .amount .header,
+.revenue-page .page-content .revenue-data form .date .header,
+.revenue-page .page-content .revenue-data .category .header,
+.revenue-page .page-content .revenue-data .comment .header{
 	width: 100%;
-	height: 50%;
+	height: 42.5px;
 	padding-left: 10px;
 	background-color: rgb(184, 194, 222);
-	border: 1px solid red;
+	border: 1px solid grey;
 	border-radius: 20px;
 	display: flex;
 	align-items: center;
 }
 
-.revenue-page .page-content .revenue-data form .amount .input{
+.revenue-page .page-content .revenue-data form .amount .input,
+.revenue-page .page-content .revenue-data form .date .input,
+.revenue-page .page-content .revenue-data .category .input,
+.revenue-page .page-content .revenue-data .comment .input{
 	width: 100%;
-	height: 50%;
-	padding-left: 10px;
-	display: flex;
-	gap: 20px;
-	align-items: center;
+	height: 60%;
 }
 
-.revenue-page .page-content .revenue-data form .amount .input .text{
+.revenue-page .page-content .revenue-data form .amount .input .text,
+.revenue-page .page-content .revenue-data form .date .input .text,
+.revenue-page .page-content .revenue-data .category .input .text{
 	min-width: 10%;
 }
 
+.revenue-page .page-content .revenue-data form .date, .amount, .category{
+	background-color: var(--body-color);
+}
+
+.revenue-page .page-content .revenue-data form .amount, 
 .revenue-page .page-content .revenue-data form .date{
 	width: 100%;
-	height: 13%;
-}
-
-.revenue-page .page-content .revenue-data form .date .header{
-	width: 100%;
-	height: 50%;
-	padding-left: 10px;
-	background-color: rgb(184, 194, 222);
-	border: 1px solid red;
-	border-radius: 20px;
+	height: 15%;
 	display: flex;
-	align-items: center;
-}
-
-.revenue-page .page-content .revenue-data form .date .input{
-	width: 100%;
-	height: 50%;
-	padding-left: 10px;
-	display: flex;
-	gap: 20px;
-	align-items: center;
-}
-
-.revenue-page .page-content .revenue-data form .date .input .text{
-	min-width: 10%;
+	flex-direction: column;
+	border: 1px solid grey;
 }
 
 .revenue-page .page-content .revenue-data .category{
@@ -606,29 +593,43 @@ body.dark .switch::before{
 	height: 15%;
 	display: flex;
 	flex-direction: column;
+	border: 1px solid grey;
 }
 
-
-.revenue-page .page-content .revenue-data .category .header{
-	width: 100%;
-	height: 35%;
+.revenue-page .page-content .revenue-data form .amount .input,
+.revenue-page .page-content .revenue-data form .date .input{
 	padding-left: 10px;
-	background-color: rgb(184, 194, 222);
-	border: 1px solid red;
-	border-radius: 20px;
 	display: flex;
+	gap: 20px;
 	align-items: center;
 }
 
-.revenue-page .page-content .revenue-data .category .input{
-	width: 100%;
-	display: flex;
-	padding-top: 10px;
+.revenue-page .page-content .revenue-data form .amount .input input,
+.revenue-page .page-content .revenue-data form .date .input input{
+	width: 180px;
+	height: 30px;
 	padding-left: 10px;
+	border: 1px solid grey;
+	border-radius: 10px;
+	transition: 0.3s ease;
 }
 
-.revenue-page .page-content .revenue-data .category .input .text{
-	min-width: 10%;
+.revenue-page .page-content .revenue-data form .amount .input input:hover,
+.revenue-page .page-content .revenue-data form .date .input input:hover{
+	border: 1px solid black;
+}
+
+
+.revenue-page .page-content .revenue-data form .amount .input input:focus,
+.revenue-page .page-content .revenue-data form .date .input input:focus{
+	outline: none;
+}
+
+.revenue-page .page-content .revenue-data .category .input{
+	display: flex;
+	gap: 20px;
+	padding-left: 10px;
+	align-items: center;
 }
 
 .revenue-page .page-content .revenue-data .category .input ul{
@@ -637,39 +638,33 @@ body.dark .switch::before{
 	gap: 45px;
 }
 
-
-
 .revenue-page .page-content .revenue-data .comment{
 	width: 100%;
 	height: 25%;
 	display: flex;
 	flex-direction: column;
-	gap: 1px
-}
-
-.revenue-page .page-content .revenue-data .comment .header{
-	width: 100%;
-	height: 30%;
-	padding-left: 10px;
 	background-color: rgb(184, 194, 222);
-	border: 1px solid red;
-	border-radius: 20px;
-	display: flex;
-	align-items: center;
 }
 
 .revenue-page .page-content .revenue-data .comment .input{
-	width: 100%;
-	height: 70%;
+	height: 75%;
+	border-radius: 20px;
 }
 
-.revenue-page .page-content .revenue-data .comment .input input{
+.revenue-page .page-content .revenue-data .comment .input textarea{
 	width: 100%;
-	height: 90%;
+	height: 100%;
 	border-radius: 10px;
 	padding: 10px;
+	border: none;
+	border-radius: 20px;
+	background-color: var(--body-color);
+	
 }
 
+.revenue-page .page-content .revenue-data .comment .input textarea:focus{
+	outline: none;
+}
 
 .revenue-page .page-content .revenue-data .submit{
 	width: 100%;
@@ -678,6 +673,7 @@ body.dark .switch::before{
 	justify-content: right;
 	gap: 20px;
 	margin-bottom: 20px;
+	border: none;
 }
 
 .revenue-page .page-content .revenue-data .submit button{
@@ -687,13 +683,16 @@ body.dark .switch::before{
 	border-radius: 15px;
 	cursor: pointer;
 	margin-right: 10px;
+	transition: 0.7s ease;
 }
 
 .revenue-page .page-content .revenue-data .submit .comfirm button:hover{
+	border: 1px solid black;
 	background-color: lightgreen;
 }
 
 .revenue-page .page-content .revenue-data .submit .cancel button:hover{
+	border: 1px solid black;
 	background-color: lightcoral;
 }
 
