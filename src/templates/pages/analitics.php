@@ -10,7 +10,7 @@
 			<div class="text">
 				<h2>Analitics</h2>
 			</div>
-
+			
 		</div>
 		
 		<div class="analitics-content">

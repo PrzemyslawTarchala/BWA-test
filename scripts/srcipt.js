@@ -3,7 +3,10 @@ const body = document.querySelector("body"),
 			toggle = document.querySelector(".toggle"),
 			searchBtn = document.querySelector(".search-box"),
 			modeSwitch = document.querySelector(".toggle-switch"),
-			modeText = document.querySelector(".mode-text");
+			modeText = document.querySelector(".mode-text"),
+			
+			expand = document.querySelector(".expand"),
+			expanseCategoryList = document.querySelector(".expense-data .category .input");
 
 
 			toggle.addEventListener("click", () => {
@@ -19,3 +22,10 @@ const body = document.querySelector("body"),
 					modeText.innerText = "Dark Mode";
 				}
 			});
+
+			expand.addEventListener("click", () => {
+				expanseCategoryList.classList.toggle("up");
+			});
+
+
+
