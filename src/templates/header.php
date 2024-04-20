@@ -29,7 +29,6 @@
 
 					<div class="text header-text">
 						<span class="name">Budget App</span>
-
 					</div>
 				</div>
 

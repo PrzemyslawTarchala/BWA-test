@@ -15,14 +15,14 @@
 			<form action="" class="form">
 				<div class="amount ">
 					<div class="header">
-						<h3>Amount</h3>
+						<h3>Amount & Payment method</h3>
 					</div>
 					<div class="input">
 						<div class="text">
 							<span>Enter the amount:</span>
 						</div>
-						<div>
-							<input type="float">
+						<div class="float">
+							<input type="float" placeholder="$">
 						</div>
 						<div class="payment-method">
 							<span>Payment method:</span>
@@ -50,18 +50,42 @@
 				<div class="category">
 					<div class="header">
 						<h3>Category</h3>
-						<i class='bx bx-chevron-up expand'></i>
 					</div>
-					<div class="input up">
+					<div class="input">
 						<div class="text">
 							<span>Choose category: </span>
 						</div>
-						<ul>
-							<li><input type="radio" id="" name="" value=""> Salary</li>
-							<li><input type="radio" id="" name="bankInterst" value=""> Bank interest</li>
-							<li><input type="radio" id="" name="allegro" value=""> Allegro</li>
-							<li><input type="radio" id="" name="other" value=""> Other</li>
-						</ul>
+						<div class="category-choose">
+							<ul>
+								<li><input type="radio" id="" name="category" value=""> Food</li>
+								<li><input type="radio" id="" name="category" value=""> Rent</li>
+								<li><input type="radio" id="" name="category" value=""> Transport</li>
+							</ul>
+							<ul>
+								<li><input type="radio" id="" name="category" value=""> Telecommunication</li>
+								<li><input type="radio" id="" name="category" value=""> Health care</li>
+								<li><input type="radio" id="" name="category" value=""> Clothes</li>
+							</ul>
+							<ul>
+								<li><input type="radio" id="" name="category" value=""> Hygiene</li>
+								<li><input type="radio" id="" name="category" value=""> Kids</li>
+								<li><input type="radio" id="" name="category" value=""> Entertainment</li>
+							</ul>
+							<ul>
+								<li><input type="radio" id="" name="category" value=""> Trips</li>
+								<li><input type="radio" id="" name="category" value=""> Self develepment</li>
+								<li><input type="radio" id="" name="category" value=""> Books</li>
+							</ul>
+							<ul>
+								<li><input type="radio" id="" name="category" value=""> Savings</li>
+								<li><input type="radio" id="" name="category" value=""> Pensions</li>
+								<li><input type="radio" id="" name="category" value=""> Commitments</li>
+							</ul>
+							<ul>
+								<li><input type="radio" id="" name="category" value=""> Donation</li>
+								<li><input type="radio" id="" name="category" value=""> Other</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 

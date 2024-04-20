@@ -488,7 +488,7 @@ body.dark .switch::before{
 
 .revenue-page{
 	width: 93%;
-	height: 85%;
+	height: auto;
 	background: rgb(243, 250, 252);
 	margin: 20px 20px 20px 110px;
 	border: 1px solid black;
@@ -498,7 +498,7 @@ body.dark .switch::before{
 
 .revenue-page .page-content{
 	width: 100%;
-	height: 100%;
+	height: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -598,7 +598,7 @@ body.dark .switch::before{
 
 .revenue-page .page-content .revenue-data form .amount .input,
 .revenue-page .page-content .revenue-data form .date .input{
-	padding-left: 10px;
+	padding: 15px;
 	display: flex;
 	gap: 20px;
 	align-items: center;
@@ -628,7 +628,7 @@ body.dark .switch::before{
 .revenue-page .page-content .revenue-data .category .input{
 	display: flex;
 	gap: 20px;
-	padding-left: 10px;
+	padding: 15px;
 	align-items: center;
 }
 
@@ -647,7 +647,7 @@ body.dark .switch::before{
 }
 
 .revenue-page .page-content .revenue-data .comment .input{
-	height: 75%;
+	height: 150px;
 	border-radius: 20px;
 }
 
@@ -702,7 +702,7 @@ body.dark .switch::before{
 
 .expense-page{
 	width: 93%;
-	height: 85%;
+	height: auto;
 	background: rgb(243, 250, 252);
 	margin: 20px 20px 20px 110px;
 	border: 1px solid black;
@@ -712,7 +712,7 @@ body.dark .switch::before{
 
 .expense-page .page-content{
 	width: 100%;
-	height: 100%;
+	height: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -793,18 +793,6 @@ body.dark .switch::before{
 	background-color: #707070;
 }
 
-.expense-page .page-content .expense-data .category .input{
-	width: 100%;
-	padding-top: 15px;
-	height: auto;
-	display: flex;
-	align-items: center;
-}
-
-.expense-page .page-content .expense-data .category .input.up{
-		height: 0%;
-}
-
 .expense-page .page-content .expense-data form .amount .input,
 .expense-page .page-content .expense-data form .date .input,
 .expense-page .page-content .expense-data .comment .input{
@@ -813,8 +801,7 @@ body.dark .switch::before{
 }
 
 .expense-page .page-content .expense-data form .amount .input .text,
-.expense-page .page-content .expense-data form .date .input .text,
-.expense-page .page-content .expense-data .category .input .text{
+.expense-page .page-content .expense-data form .date .input .text{
 	min-width: 10%;
 }
 
@@ -834,21 +821,28 @@ body.dark .switch::before{
 
 .expense-page .page-content .expense-data .category{
 	width: 100%;
-	height: 15%;
+	height: auto;
 	display: flex;
 	flex-direction: column;
 	border: 1px solid grey;
 }
 
+.expense-page .page-content .expense-data .category .input .text{
+	height: 100%;
+	min-width: 10%;
+	display: flex;
+	align-items: start;
+}
+
 .expense-page .page-content .expense-data form .amount .input,
 .expense-page .page-content .expense-data form .date .input{
-	padding-left: 10px;
+	padding: 15px;
 	display: flex;
 	gap: 20px;
 	align-items: center;
 }
 
-.expense-page .page-content .expense-data form .amount .input input,
+.expense-page .page-content .expense-data form .amount .input .float input,
 .expense-page .page-content .expense-data form .date .input input{
 	width: 180px;
 	height: 30px;
@@ -860,13 +854,14 @@ body.dark .switch::before{
 
 .expense-page .page-content .expense-data form .amount .payment-method{
 	display: flex;	
-	margin-left: 40px;
+	margin-left: 60px;
+	gap: 50px;
 }
 
 .expense-page .page-content .expense-data form .amount .payment-method li{
 	list-style: none;
 	display: flex;
-	size: 0.5rem;
+	gap: 5px;
 }
 
 .expense-page .page-content .expense-data form .amount .input input:hover,
@@ -881,16 +876,38 @@ body.dark .switch::before{
 }
 
 .expense-page .page-content .expense-data .category .input{
+	width: 100%;
+	height: auto;
 	display: flex;
 	gap: 20px;
-	padding-left: 10px;
-	align-items: center;
+	padding: 10px;
+	align-items: start;
+}
+
+.expense-page .page-content .expense-data .category .input .text{
+	min-width: 10%;
+}
+
+.expense-page .page-content .expense-data .category .input .category-choose{
+	width: 85%;
+	height: auto;
+	display: flex;
+	gap: 60px;
+}
+
+.expense-page .page-content .expense-data .category .input .category-choose ul{
+	display: flex;
+	flex-direction: column;
+}
+
+.expense-page .page-content .expense-data .category .input .category-choose li{
+	width: auto;
 }
 
 .expense-page .page-content .expense-data .category .input ul{
 	list-style: none;
 	display: flex;
-	gap: 45px;
+	gap: 15px;
 }
 
 .expense-page .page-content .expense-data .comment{
@@ -902,7 +919,7 @@ body.dark .switch::before{
 }
 
 .expense-page .page-content .expense-data .comment .input{
-	height: 75%;
+	height: 150px;
 	border-radius: 20px;
 }
 

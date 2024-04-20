@@ -22,7 +22,7 @@
 								<span>Enter the amount:</span>
 							</div>
 							<div>
-								<input type="float">
+								<input type="float" placeholder="$">
 							</div>
 						</div>
 					</div>

@@ -23,9 +23,6 @@ const body = document.querySelector("body"),
 				}
 			});
 
-			expand.addEventListener("click", () => {
-				expanseCategoryList.classList.toggle("up");
-			});
 
 
 
