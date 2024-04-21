@@ -9,11 +9,11 @@ include_once("../Auxiliary/Auxiliary.php");
 
 class UserController
 {
-	private $User;
+	private UserModel $user;
 
 	public function __construct()
 	{
-		$this->User = new UserModel;
+		$this->user = new UserModel;
 	}
 
 	public function register(): void 
@@ -29,7 +29,7 @@ class UserController
 		];
 
 		$this->registerValidation($registerData);
-		$this->User->register($registerData);
+		$this->user->register($registerData);
 	}
 
 	public function login(): void 
@@ -42,9 +42,9 @@ class UserController
 			'password' => $_POST['password']
 		];
 
-		if($this->User->login($loginData)) {
+		if($this->user->login($loginData)) {
 			$_SESSION['logged'] = true;
-			header("Location: ../templates/pages/menu.php");
+			header("Location: ../templates/pages/overview.php");
 		} else {
 			$_SESSION['message'] = "Wrong username or password.";
 			header("Location: ../templates/pages/sign_in.php");
