@@ -19,7 +19,7 @@
 			<div class="input-section">
 
 				<form action="../../Controller/UserController.php" method="post" class="login-form">
-				<input type="hidden" name="type" value="login">
+					<input type="hidden" name="type" value="login">
 
 					<label for="username"></label>
 					<input type="text" id="username" name="username" placeholder="username"></br>

@@ -30,7 +30,7 @@
 				</div>
 
 				<div class="expense">
-					<h5>Monthly income</h5>
+					<h5>Monthly expense</h5>
 				</div>
 		
 			</div>
