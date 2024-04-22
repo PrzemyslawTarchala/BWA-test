@@ -4,32 +4,19 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-include_once("../Model/UserModel.php");
-include_once("../Auxiliary/Auxiliary.php");
+require_once("src/Model/UserModel.php");
+require_once("src/Auxiliary/Auxiliary.php");
 
 use App\Model\UserModel;
-use App\Auxiliary\AuxiliaryMethod;
+use App\Auxiliary\Auxiliary;
 
 class UserController
 {
 	private UserModel $user;
 
-	public function __construct()
+	public function __construct(array $config)
 	{
-		$this->user = new UserModel;
-	}
-
-	public function register(): void 
-	{
-		$registerData = [
-			'username' => $_POST['newUsername'],
-			'email' => $_POST['newEmail'],
-			'password' => $_POST['password'],
-			'comfirmPassword' => $_POST['confirmPassword']
-		];
-
-		$this->registerValidation($registerData);
-		$this->user->register($registerData);
+		$this->user = new UserModel($config);
 	}
 
 	public function login(): void 
@@ -41,78 +28,62 @@ class UserController
 
 		if($this->user->login($loginData)) {
 			$_SESSION['logged'] = true;
-			header("Location: ../templates/pages/overview.php");
+			Auxiliary::redirect("overview");
 		} else {
 			$_SESSION['message'] = "Wrong username or password.";
-			header("Location: ../templates/pages/sign_in.php");
+			Auxiliary::redirect("login");
 		}
 	}
 
-	public function logout(): void
+	public function register(): void 
 	{
-		$_SESSION['logged'] = false; 
-		header("Location: ../../index.php");
+		$registerData = [
+			'username' => $_POST['newUsername'],
+			'email' => $_POST['newEmail'],
+			'password' => $_POST['password'],
+			'confirmPassword' => $_POST['confirmPassword']
+		];
+
+		$this->registerValidation($registerData);
+		$this->user->register($registerData);
 	}
 
 	private function registerValidation(array $registerData): void
 	{
 		if(strlen($registerData['username']) < 1){
 			$_SESSION['message'] = "Login too short. Minimum 3 characters.";
-			header("Location: ../templates/pages/register.php");
-			exit();
+			Auxiliary::redirect("register");
 		}
 
 		if($this->user->isNewUsernameAvailiabity($registerData['username'])){
 			$_SESSION['message'] = "Login already exists";
-			header("Location: ../templates/pages/register.php");
-			exit();
+			Auxiliary::redirect("register");
 		} 
 
 		if(!strpos($registerData['email'], '@') || !strpos($registerData['email'], '.')){
 			$_SESSION['message'] = "Wrong email";
-			header("Location: ../templates/pages/register.php");
-			exit();
+			Auxiliary::redirect("register");
 		}
 
 		if($this->user->isNewEmailAvailiabity($registerData['email'])){
 			$_SESSION['message'] = "Email already exists";
-			header("Location: ../templates/pages/register.php");
-			exit();
+			Auxiliary::redirect("register");
 		} 
 
 		if(strlen($registerData['password']) < 6){
 			$_SESSION['message'] = "Password is too short. Minimum 6 characters.";
-			header("Location: ../templates/pages/register.php");
-			exit();
+			Auxiliary::redirect("register");
 		} 
 
-		if($registerData['password'] != $registerData['confirmPassword']){
+		if($registerData['password'] !== $registerData['confirmPassword']){
 			$_SESSION['message'] = "Passwords are diffrent";
-			header("Location: ../templates/pages/register.php");
-			exit();
+			Auxiliary::redirect("register");
 		} 
 	}
-}
 
-$init = new UserController;
-
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-	switch($_POST['type']){
-		case 'register':
-			$init->register();
-			break;
-		case 'login':
-			$init->login();
-			break;
-		default:
-			redirect("../../index.php");
-	} 
-} elseif ($_SERVER['REQUEST_METHOD'] == 'GET') {
-	switch ($_GET['q']) {
-			case 'logout':
-					$init->logout();
-					break;
-			default:
-					redirect("../index.php");
+	public function logout(): void
+	{
+		$_SESSION['logged'] = false; 
+		Auxiliary::redirect("login");
 	}
-}
+ }

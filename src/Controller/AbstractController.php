@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+require_once("src/Controller/UserController.php");
+
 use App\Request;
 use App\View;
+use App\Controller\UserController;
 
 abstract class AbstractController
 {
@@ -14,22 +17,21 @@ abstract class AbstractController
 
 	protected Request $request;
 	protected View $view;
-	protected UserModel $user;
-	protected RevenueModel $revenue;
-	protected ExpenseModel $expense;
+	protected UserController $user;
+
+	public function __construct(Request $request)
+	{
+		$this->request = $request;
+		$this->view = new View();
+		$this->user = new UserController(self::$configuration['db']);
+	}
 
 	public static function initConfiguration(array $configuration): void
 	{
 		self::$configuration = $configuration;
 	}
 
-	public function __construct(Request $request)
-	{
-		$this->request = $request;
-		$this->view = new View();
-	}
-
-	final public function run(): void //walidacja czy ktos jest zalogowany
+	final public function run(): void 
 	{
 		$action = $this->action() . 'Action';
 		if(!method_exists ($this, $action)){

@@ -6,15 +6,29 @@ namespace App\Model;
 
 use PDO;
 
-session_start();
-
 class UserModel
 {
 	private $conn;
 
-	public function __construct()
+	public function __construct(array $config)
 	{
-		$this->createConnectionToDB();
+		$this->createConnection($config);
+	}
+
+	public function login(array $loginData): bool
+	{
+		$query = "SELECT users.id FROM users WHERE username = :username AND password = :password";
+		$stmt = $this->conn->prepare($query);
+		$stmt->bindParam(':username', $loginData['username']);
+		$stmt->bindParam(':password', $loginData['password']);
+		$stmt->execute();
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if($result != 0){
+			return true;
+		} else {
+			return false;
+		} 
 	}
 
 	public function register(array $registerData): void 
@@ -57,33 +71,16 @@ class UserModel
 		}
 	}
 
-	public function login(array $loginData): bool
+	private function createConnection(array $config): void
 	{
-		$query = "SELECT users.id FROM users WHERE username = :username AND password = :password";
-		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(':username', $loginData['username']);
-		$stmt->bindParam(':password', $loginData['password']);
-		$stmt->execute();
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		if($result != 0){
-			return true;
-		} else {
-			return false;
-		} 
-	}
-
-	private function createConnectionToDB(): void
-	{
-		$config = require_once("../../config/config.php");
-		$dsn = "mysql:dbname={$config['db']['database']};host={$config['db']['host']}";
+		$dsn = "mysql:dbname={$config['database']};host={$config['host']}";
 		$this->conn = new PDO(
 			$dsn,
-			$config['db']['user'],
-			$config['db']['password'],
+			$config['user'],
+			$config['password'],
 			[
-				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION 
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION //Przy polaczeniu ustwaione wszystkie "error'y" będa traktowane jako "exception"
 			]
 		);
 	}
-}
+ }

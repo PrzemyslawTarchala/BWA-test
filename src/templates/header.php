@@ -1,6 +1,5 @@
 <?php 
     include_once("../../Utils/debug.php");
-    
     session_start(); 
 ?>
 
@@ -20,22 +19,18 @@
 
 		
         <?php else: ?>
-        
         <nav class="sidebar close">
-		    <header>
-				<div class="image-text">
-					<span class="image">
-						<img src="/img/logo.png" alt="">
-					</span>
-
-					<div class="text header-text">
-						<span class="name">Budget App</span>
-					</div>
-				</div>
-
-				<i class='bx bx-chevron-right toggle'></i>
-			</header>
-
+            <header>
+                <div class="image-text">
+                    <span class="image">
+                        <img src="/img/logo.png" alt="">
+                    </span>
+                    <div class="text header-text">
+                        <span class="name">Budget App</span>
+                    </div>
+                </div>
+                <i class='bx bx-chevron-right toggle'></i>
+            </header>
                 <div class="menu-bar">
                     <div class="menu">
                         <ul class="menu-links">
@@ -45,21 +40,18 @@
                                     <span class="text nav-text">Overview</span>
                                 </a>
                             </li>
-
                             <li class="nav-link">
                                 <a href="revenue.php">
                                     <i class='bx bx-plus icon' ></i>
                                     <span class="text nav-text">Add revenue</span>
                                 </a>
                             </li>
-
                             <li class="nav-link">
                                 <a href="addExpense.php">
                                     <i class='bx bx-minus icon' ></i>
                                     <span class="text nav-text">Add expense</span>
                                 </a>
                             </li>
-
                             <li class="nav-link">
                                 <a href="analitics.php">
                                     <i class='bx bx-pie-chart-alt icon' ></i>
@@ -68,27 +60,22 @@
                             </li>
                         </ul>
                     </div>
-
                     <div class="bottom-content">
                         <li class="">
-                            <a href="../../Controller/UserController.php?q=logout">
+                            <a href="/?action=logout">
                                 <i class='bx bx-log-out icon' ></i>
                                 <span class="text nav-text">Logout</span>
                             </a>
                         </li>
-
                         <li class="mode">
                             <div class="moon-sun">
                                 <i class='bx bx-moon icon moon' ></i>
                                 <i class='bx bx-sun icon sun' ></i>
                             </div>
-                            
-                            <span class="mode-text text">Dark Mode</span>
-                            
+                            <span class="mode-text text">Dark Mode</span>                      
                             <div class="toggle-switch">
                                 <span class="switch"></span>
                             </div>	
-
                         </li>
                     </div>
                 </div>
