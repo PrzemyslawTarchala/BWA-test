@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-session_start();
+namespace App\Controller;
 
 include_once("../Model/UserModel.php");
 include_once("../Auxiliary/Auxiliary.php");
+
+use App\Model\UserModel;
+use App\Auxiliary\AuxiliaryMethod;
 
 class UserController
 {
@@ -18,9 +21,6 @@ class UserController
 
 	public function register(): void 
 	{
-
-		echo "register";
-
 		$registerData = [
 			'username' => $_POST['newUsername'],
 			'email' => $_POST['newEmail'],
@@ -34,9 +34,6 @@ class UserController
 
 	public function login(): void 
 	{
-
-		echo 'Login';
-
 		$loginData = [
 			'username' => $_POST['username'],
 			'password' => $_POST['password']
@@ -65,7 +62,7 @@ class UserController
 			exit();
 		}
 
-		if($this->User->isNewUsernameAvailiabity($registerData['username'])){
+		if($this->user->isNewUsernameAvailiabity($registerData['username'])){
 			$_SESSION['message'] = "Login already exists";
 			header("Location: ../templates/pages/register.php");
 			exit();
@@ -77,7 +74,7 @@ class UserController
 			exit();
 		}
 
-		if($this->User->isNewEmailAvailiabity($registerData['email'])){
+		if($this->user->isNewEmailAvailiabity($registerData['email'])){
 			$_SESSION['message'] = "Email already exists";
 			header("Location: ../templates/pages/register.php");
 			exit();

@@ -2,27 +2,20 @@
 
 declare(strict_types=1);
 
-session_start();
+namespace App\Controller;
 
-require_once("src/View.php");
+use App\Controller\AbstractController;
 
-class AppController
+class AppController extends AbstractController
 {
-	private View $view;
-
-	public function __construct()
+	public function loginAction(): void
 	{
-		$this->view = new View;
+		$this->view->render('login');
 	}
-	
-	public function run(): void 
+
+	public function registerAction(): void 
 	{
-		if($_SESSION['logged']){
-			$this->view->render("overview");
-		} else {
-			$this->view->render("sign_in");
-		}
-		
+		$this->view->render('register');
 	}
 
 }

@@ -36,7 +36,7 @@
 				</form>
 				
 				<div>
-						<a href="register.php">Registration here</a>
+						<a href="/?action=register">Registration here</a>
 				</div>
 
 			</div>

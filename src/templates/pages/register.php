@@ -38,7 +38,7 @@
 				</form>
 
 				<div>
-						<a href="sign_in.php">Sign in</a>
+						<a href="/?action=login">Sign in</a>
 				</div>
 
 			</div>
