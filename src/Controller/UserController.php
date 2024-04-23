@@ -6,6 +6,7 @@ namespace App\Controller;
 
 require_once("src/Model/UserModel.php");
 require_once("src/Auxiliary/Auxiliary.php");
+require_once("src/Utils/debug.php");
 
 use App\Model\UserModel;
 use App\Auxiliary\Auxiliary;
@@ -26,10 +27,13 @@ class UserController
 			'password' => $_POST['password']
 		];
 
-		if($this->user->login($loginData)) {
+		if($result = $this->user->login($loginData)) {
+			$_SESSION['userId'] = $result['id'];
 			$_SESSION['logged'] = true;
 			Auxiliary::redirect("overview");
 		} else {
+			$_SESSION['userId'] = 0;
+			$_SESSION['logged'] = false;
 			$_SESSION['message'] = "Wrong username or password.";
 			Auxiliary::redirect("login");
 		}
@@ -83,6 +87,7 @@ class UserController
 
 	public function logout(): void
 	{
+		$_SESSION['userId'] = 0;
 		$_SESSION['logged'] = false; 
 		Auxiliary::redirect("login");
 	}

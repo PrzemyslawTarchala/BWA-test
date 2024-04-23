@@ -15,7 +15,7 @@ class UserModel
 		$this->createConnection($config);
 	}
 
-	public function login(array $loginData): bool
+	public function login(array $loginData): array
 	{
 		$query = "SELECT users.id FROM users WHERE username = :username AND password = :password";
 		$stmt = $this->conn->prepare($query);
@@ -23,12 +23,7 @@ class UserModel
 		$stmt->bindParam(':password', $loginData['password']);
 		$stmt->execute();
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		if($result != 0){
-			return true;
-		} else {
-			return false;
-		} 
+		return $result;
 	}
 
 	public function register(array $registerData): void 

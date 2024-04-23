@@ -15,7 +15,7 @@
 </head>
 <body>
 
-		<?php if(isset($_SESSION['logged'])  && $_SESSION['logged'] === false ) :  ?>
+		<?php if(!@isset($_SESSION['logged']) || ($_SESSION['logged'] === false)) : ?> 
 
 		
         <?php else: ?>
