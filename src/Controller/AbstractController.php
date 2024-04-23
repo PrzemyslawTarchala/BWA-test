@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Controller;
 
 require_once("src/Controller/UserController.php");
+require_once("src/Exception/ConfigurationException.php");
 
 use App\Request;
 use App\View;
 use App\Controller\UserController;
+use App\Exception\ConfigurationException;
 
 abstract class AbstractController
 {
@@ -21,6 +23,10 @@ abstract class AbstractController
 
 	public function __construct(Request $request)
 	{
+		if(empty(self::$configuration['db'])){
+			throw new ConfigurationException('Configuration Error');
+		}
+
 		$this->request = $request;
 		$this->view = new View();
 		$this->user = new UserController(self::$configuration['db']);
@@ -37,7 +43,7 @@ abstract class AbstractController
 		if(!method_exists ($this, $action)){
 			$action = self::DEFAULT_ACTION . 'Action';
 		}
-		$this->$action();
+		$this->$action();	
 	}
 
 	private function action(): string
