@@ -25,7 +25,33 @@ class AppController extends AbstractController
 		$this->view->render('register');
 	}
 
-	public function logout(): void
+	public function addRevenueAction(): void
+	{
+		// if($this->request->hasPost()){
+
+		// }
+		$this->view->render("addRevenue");
+	}
+
+	public function addExpenseAction(): void
+	{
+		// if($this->request->hasPost()){
+
+		// }
+		$this->view->render("addExpense");
+	}
+
+	public function overviewAction(): void
+	{
+		$this->view->render("overview");
+	}
+
+	public function analiticsAction(): void
+	{
+		$this->view->render("analitics");
+	}
+
+	public function logoutAction(): void
 	{
 		$this->user->logout();
 	}

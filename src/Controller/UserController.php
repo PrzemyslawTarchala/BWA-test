@@ -6,7 +6,7 @@ namespace App\Controller;
 
 require_once("src/Model/UserModel.php");
 require_once("src/Auxiliary/Auxiliary.php");
-require_once("src/Utils/debug.php");
+//require_once("src/Utils/debug.php");
 
 use App\Model\UserModel;
 use App\Auxiliary\Auxiliary;
@@ -50,6 +50,8 @@ class UserController
 
 		$this->registerValidation($registerData);
 		$this->user->register($registerData);
+		$_SESSION['message'] = "Registration correct! :)";
+		Auxiliary::redirect("login");
 	}
 
 	private function registerValidation(array $registerData): void

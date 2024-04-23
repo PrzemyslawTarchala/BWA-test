@@ -17,7 +17,7 @@
 
 		<?php if(!@isset($_SESSION['logged']) || ($_SESSION['logged'] === false)) : ?> 
 
-		
+
         <?php else: ?>
         <nav class="sidebar close">
             <header>
@@ -35,25 +35,25 @@
                     <div class="menu">
                         <ul class="menu-links">
                             <li class="nav-link">
-                                <a href="overview.php">
+                                <a href="/?action=overview">
                                     <i class='bx bx-home-alt icon' ></i>
                                     <span class="text nav-text">Overview</span>
                                 </a>
                             </li>
                             <li class="nav-link">
-                                <a href="revenue.php">
+                                <a href="/?action=addRevenue">
                                     <i class='bx bx-plus icon' ></i>
                                     <span class="text nav-text">Add revenue</span>
                                 </a>
                             </li>
                             <li class="nav-link">
-                                <a href="addExpense.php">
+                                <a href="/?action=addExpense">
                                     <i class='bx bx-minus icon' ></i>
                                     <span class="text nav-text">Add expense</span>
                                 </a>
                             </li>
                             <li class="nav-link">
-                                <a href="analitics.php">
+                                <a href="/?action=analitics">
                                     <i class='bx bx-pie-chart-alt icon' ></i>
                                     <span class="text nav-text">Analitics</span>
                                 </a>

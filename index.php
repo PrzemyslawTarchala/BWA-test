@@ -20,9 +20,6 @@ use App\Exception\ConfigurationException;
 $configuration = require_once("config/config.php");
 $request = new Request($_GET, $_POST, $_SERVER);
 
-$_SESSION['logged'] = false;
-$_SESSION['userId'] = 0;
-
 try{
 	AbstractController::initConfiguration($configuration);
 	(new AppController($request)) -> run();
