@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Model;
 
 require_once("src/Model/AbstractModel.php");
+require_once("src/Utils/debug.php");
 
 use PDO;
 use App\Model\AbstractModel;
@@ -19,7 +20,11 @@ class UserModel extends AbstractModel
 		$stmt->bindParam(':password', $loginData['password']);
 		$stmt->execute();
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-		return $result;
+		if(!$result){
+			return [];
+		} else {
+			return $result;
+		}
 	}
 
 	public function register(array $registerData): void 
