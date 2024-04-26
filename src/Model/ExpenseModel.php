@@ -8,11 +8,11 @@ require_once("src/Model/AbstractModel.php");
 
 use App\Model\AbstractModel;
 
-class RevenueModel extends AbstractModel
+class ExpenseModel extends AbstractModel
 {
-	public function addRevenue(array $revenueData)
+	public function addExpense(array $expenseData)
 	{
-		echo('Revenue Model');
+		echo('Expense Model');
 		exit();
 	}
 }

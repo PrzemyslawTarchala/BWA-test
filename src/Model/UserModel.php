@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+require_once("src/Model/AbstractModel.php");
+
 use PDO;
+use App\Model\AbstractModel;
 
-class UserModel
+class UserModel extends AbstractModel
 {
-	private $conn;
-
-	public function __construct(array $config)
-	{
-		$this->createConnection($config);
-	}
-
 	public function login(array $loginData): array
 	{
 		$query = "SELECT users.id FROM users WHERE username = :username AND password = :password";
@@ -64,18 +60,5 @@ class UserModel
 		} else {
 			return true;
 		}
-	}
-
-	private function createConnection(array $config): void
-	{
-		$dsn = "mysql:dbname={$config['database']};host={$config['host']}";
-		$this->conn = new PDO(
-			$dsn,
-			$config['user'],
-			$config['password'],
-			[
-				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION //Przy polaczeniu ustwaione wszystkie "error'y" będa traktowane jako "exception"
-			]
-		);
 	}
  }

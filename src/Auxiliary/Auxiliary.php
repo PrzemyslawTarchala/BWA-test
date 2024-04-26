@@ -9,7 +9,7 @@ class Auxiliary
 	public static function display(): void
 	{
 		if(!empty($_SESSION['message'])){
-			echo "</br>" . $_SESSION["message"] . "</br></br>";
+			echo "</br><strong>" . $_SESSION["message"] . "</strong></br></br>";
 			unset($_SESSION["message"]);
 		}
 	}

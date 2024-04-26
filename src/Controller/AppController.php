@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+require_once("src/Utils/debug.php");
+
 use App\Controller\AbstractController;
 
 class AppController extends AbstractController
 {
-
 	public function loginAction(): void
 	{
 		if($this->request->hasPost()){
@@ -25,19 +26,19 @@ class AppController extends AbstractController
 		$this->view->render('register');
 	}
 
-	public function addRevenueAction(): void
+	public function addRevenueAction(): void 
 	{
-		// if($this->request->hasPost()){
-
-		// }
+		if($this->request->hasPost()){
+			$this->revenue->addNewTransaction();
+		}
 		$this->view->render("addRevenue");
 	}
 
 	public function addExpenseAction(): void
 	{
-		// if($this->request->hasPost()){
-
-		// }
+		if($this->request->hasPost()){
+			$this->expense->addNewTransaction();
+		}
 		$this->view->render("addExpense");
 	}
 

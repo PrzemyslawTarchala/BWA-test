@@ -34,3 +34,8 @@ catch(ConfigurationException $e){
 	echo "<h2>Application Error</h2><br>";
 	echo "$e";
 }
+
+catch(StorageException $e){
+	echo "<h2>Application Error</h2><br>";
+	echo "$e";
+}
