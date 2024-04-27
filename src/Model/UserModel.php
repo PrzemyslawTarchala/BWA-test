@@ -27,7 +27,7 @@ class UserModel extends AbstractModel
 		}
 	}
 
-	public function register(array $registerData): void 
+	public function register(array $registerData): int
 	{	
 		$query = "INSERT INTO users(username, password, email) VALUES(:username, :password, :email)";
     $stmt = $this->conn->prepare($query);
@@ -35,6 +35,7 @@ class UserModel extends AbstractModel
     $stmt->bindParam(':password', $registerData['password']);
     $stmt->bindParam(':email', $registerData['email']);
     $stmt->execute();
+		return (int) $this->conn->lastInsertId();
 	}
 
 	public function isNewUsernameAvailiabity(string $newUsername): bool
@@ -66,4 +67,35 @@ class UserModel extends AbstractModel
 			return true;
 		}
 	}
+
+	public function assignDefaultRevenueCategory(int $userId): void
+	{
+		$query = "INSERT INTO incomes_category_assigned_to_users (user_id, name)
+              SELECT :userId, name FROM incomes_category_default";
+
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+	}
+
+	public function assignDefaultExpenseCategory(int $userId): void
+	{
+		$query = "INSERT INTO expenses_category_assigned_to_users (user_id, name)
+              SELECT :userId, name FROM expenses_category_default";
+							
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+	}
+
+	public function assignDefaultPaymentMethods(int $userId): void
+	{
+		$query = "INSERT INTO payment_methods_assigned_to_users (user_id, name)
+              SELECT :userId, name FROM payment_methods_default";
+							
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+	}
  }
+ 

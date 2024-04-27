@@ -6,7 +6,7 @@ namespace App\Controller;
 
 require_once("src/Model/UserModel.php");
 require_once("src/Auxiliary/Auxiliary.php");
-//require_once("src/Utils/debug.php");
+require_once("src/Utils/debug.php");
 
 use App\Model\UserModel;
 use App\Auxiliary\Auxiliary;
@@ -49,7 +49,7 @@ class UserController
 		];
 
 		$this->registerValidation($registerData);
-		$this->user->register($registerData);
+		$this->assignDefault($this->user->register($registerData));
 		$_SESSION['message'] = "Registration correct! :)";
 		Auxiliary::redirect("login");
 	}
@@ -85,6 +85,13 @@ class UserController
 			$_SESSION['message'] = "Passwords are diffrent";
 			Auxiliary::redirect("register");
 		} 
+	}
+
+	private function assignDefault(int $userId): void
+	{
+		$this->user->assignDefaultRevenueCategory($userId);
+		$this->user->assignDefaultExpenseCategory($userId);
+		$this->user->assignDefaultPaymentMethods($userId);
 	}
 
 	public function logout(): void
