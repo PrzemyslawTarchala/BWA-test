@@ -12,6 +12,10 @@ class AppController extends AbstractController
 {
 	public function loginAction(): void
 	{
+		if(($_SESSION['userId'] > 0 && $_SESSION['logged']) === true){
+			$this->view->render("overview");
+			exit();
+		}
 		if($this->request->hasPost()){
 			$this->user->login();
 		}
