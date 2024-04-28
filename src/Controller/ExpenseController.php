@@ -15,12 +15,12 @@ use App\Request;
 
 class ExpenseController
 {
-	private ExpenseModel $expanse;
+	private ExpenseModel $expense;
 	private Request $request;
 
 	public function __construct(array $config, Request $request)
 	{
-		$this->expanse = new ExpenseModel($config);
+		$this->expense = new ExpenseModel($config);
 		$this->request = $request;
 	}
 

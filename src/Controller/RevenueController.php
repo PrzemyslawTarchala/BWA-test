@@ -35,9 +35,8 @@ class RevenueController
 			];
 			$this->validateData($revenueData);
 			$this->revenue->addRevenue($revenueData);
-		} else {
-			Auxiliary::redirect("addRevenue");
 		}
+		Auxiliary::redirect("addRevenue");
 	}
 
 	private function validateData(array $revenueData): void 
@@ -60,30 +59,3 @@ class RevenueController
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		// dump($revenueData["amount"]);
-		// dump($revenueData["date"]);
-		// dump($revenueData["category"]);
-		// dump($revenueData["comment"]);
-		// exit();

@@ -74,7 +74,7 @@
 							</ul>
 							<ul>
 								<li><input type="radio" id="category" name="category" value="hygiene"> Hygiene</li>
-								<li><input type="radio" id="category" name="category" value="kids+"> Kids</li>
+								<li><input type="radio" id="category" name="category" value="kids"> Kids</li>
 								<li><input type="radio" id="category" name="category" value="entertainment"> Entertainment</li>
 							</ul>
 							<ul>
