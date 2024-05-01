@@ -54,6 +54,13 @@ class UserController
 		Auxiliary::redirect("login");
 	}
 
+	public function logout(): void
+	{
+		$_SESSION['userId'] = 0;
+		$_SESSION['logged'] = false; 
+		Auxiliary::redirect("login");
+	}
+
 	private function registerValidation(array $registerData): void
 	{
 		if(strlen($registerData['username']) < 1){
@@ -92,12 +99,5 @@ class UserController
 		$this->user->assignDefaultRevenueCategory($userId);
 		$this->user->assignDefaultExpenseCategory($userId);
 		$this->user->assignDefaultPaymentMethods($userId);
-	}
-
-	public function logout(): void
-	{
-		$_SESSION['userId'] = 0;
-		$_SESSION['logged'] = false; 
-		Auxiliary::redirect("login");
 	}
  }
