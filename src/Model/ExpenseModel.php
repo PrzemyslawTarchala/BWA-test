@@ -18,28 +18,6 @@ class ExpenseModel extends AbstractModel
 		$this->insert($expenseData, $categoryId, $paymentMethodId);
 	}
 
-	private function getCategoryId(array $expenseData): int
-	{
-		$loggedUserId = $_SESSION['userId'];
-    $query = "SELECT id FROM expenses_category_assigned_to_users WHERE user_id = :user_id AND name = :category_name";
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':user_id', $loggedUserId, PDO::PARAM_INT);
-    $stmt->bindParam(':category_name', $expenseData['category']);
-    $stmt->execute();
-    return (int)$stmt->fetchColumn();
-	}
-
-	private function getPaymentMethodId(array $expenseData): int
-	{
-		$loggedUserId = $_SESSION['userId'];
-		$query = "SELECT id FROM payment_methods_assigned_to_users WHERE user_id = :userId AND name = :paymentMethod";
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':userId', $loggedUserId, PDO::PARAM_INT);
-    $stmt->bindParam(':paymentMethod', $expenseData['paymentMethod']);
-    $stmt->execute();
-    return (int) $stmt->fetchColumn();
-	}
-
 	private function insert(array $expenseData, int $categoryId, int $paymentMethodId): void
 	{
 		$loggedUserId = $_SESSION['userId'];

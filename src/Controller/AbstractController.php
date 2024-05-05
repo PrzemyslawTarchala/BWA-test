@@ -7,7 +7,9 @@ namespace App\Controller;
 require_once("src/Controller/UserController.php");
 require_once("src/Controller/RevenueController.php");
 require_once("src/Controller/ExpenseController.php");
+require_once("src/Controller/DataController.php");
 require_once("src/Exception/ConfigurationException.php");
+
 
 require_once("src/Utils/debug.php");
 
@@ -15,6 +17,7 @@ use App\Request;
 use App\View;
 use App\Controller\UserController;
 use App\Controller\RevenueController;
+use App\Controller\DataController;
 use App\Controller\ExpenseController;
 use App\Exception\ConfigurationException;
 
@@ -28,6 +31,7 @@ abstract class AbstractController
 	protected UserController $user;
 	protected RevenueController $revenue;
 	protected ExpenseController $expense;
+	protected DataController $data;
 
 	public function __construct(Request $request)
 	{
@@ -40,6 +44,7 @@ abstract class AbstractController
 		$this->user = new UserController(self::$configuration['db']);
 		$this->revenue = new RevenueController(self::$configuration['db'], $request);
 	  $this->expense = new ExpenseController(self::$configuration['db'], $request);
+		$this->data = new DataController(self::$configuration['db'], $request);
 	}
 
 	public static function initConfiguration(array $configuration): void
@@ -59,5 +64,13 @@ abstract class AbstractController
 	private function action(): string
 	{
 		return $this->request->getParam('action', self::DEFAULT_ACTION); //pobierz dane z parametru 'action' w przeciwnym razie DEFAULT
+	}
+
+	protected function checkLoggins(): void 
+	{
+		if(!@isset($_SESSION['userId'])) { //Check if variable exist
+			$this->view->render("login");
+			exit();
+		} 
 	}
 }
