@@ -20,7 +20,7 @@ class UserController
 		$this->user = new UserModel($config);
 	}
 
-	public function login(): void 
+	public function login(): bool
 	{
 		$loginData = [
 			'username' => $_POST['username'],
@@ -30,12 +30,14 @@ class UserController
 		if($result = $this->user->login($loginData)) {
 			$_SESSION['userId'] = $result['id'];
 			$_SESSION['logged'] = true;
-			Auxiliary::redirect("overview");
+			// Auxiliary::redirect("overview");
+			return true;
 		} else {
 			$_SESSION['userId'] = 0;
 			$_SESSION['logged'] = false;
 			$_SESSION['message'] = "Wrong username or password.";
-			Auxiliary::redirect("login");
+			// Auxiliary::redirect("login");
+			return false;
 		}
 	}
 
@@ -49,7 +51,7 @@ class UserController
 		];
 
 		$this->registerValidation($registerData);
-		$this->assignDefault($this->user->register($registerData));
+		$this->assignDefaultSettings($this->user->register($registerData));
 		$_SESSION['message'] = "Registration correct! :)";
 		Auxiliary::redirect("login");
 	}
@@ -58,6 +60,7 @@ class UserController
 	{
 		$_SESSION['userId'] = 0;
 		$_SESSION['logged'] = false; 
+		session_destroy();
 		Auxiliary::redirect("login");
 	}
 
@@ -94,7 +97,7 @@ class UserController
 		} 
 	}
 
-	private function assignDefault(int $userId): void
+	private function assignDefaultSettings(int $userId): void
 	{
 		$this->user->assignDefaultRevenueCategory($userId);
 		$this->user->assignDefaultExpenseCategory($userId);

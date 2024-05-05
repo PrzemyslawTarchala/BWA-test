@@ -389,12 +389,9 @@ body.dark .switch::before{
 	position: fixed;
 	height: 95%;
 	width: 93%;
-	/* width: calc(100%-250px); */
 	background: var(--body-color);
 	transition: var(--tran-05);
 	margin: 20px 20px 20px 110px;
-	/* border: 1px solid #E4E9F7; */
-	border: 1px solid black;
 	border-radius: 5px;
 }
 
@@ -412,12 +409,17 @@ body.dark .switch::before{
 	width: 95%;
 	display: flex; 
 	justify-content: space-between;
+	background-color :rgb(184, 194, 222);
 	border: 1px solid black;
 	border-radius: 10px;
 }
 
+.overview-page .page-content .theme h2{
+	padding-left: 20px;
+	font-size: 2rem;
+}
+
 .overview-page .page-content .charts{
-	border: 1px solid black;
 	width: 95%;
 	height: 90%;
 	display: flex;
@@ -431,45 +433,79 @@ body.dark .switch::before{
 	width: 100%;
 	height: 45%;
 	display: flex;
-	border: 1px solid black;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 .overview-page .page-content .charts .revenue, .expense {
 	width: 45%;
-	border: 1px solid black;
 }
 
-.overview-page .page-content .charts .current-year{
-	width: 95%;
+.overview-page .page-content .charts .revenue .title,
+.overview-page .page-content .charts .expense .title {
+	width: 100%;
+	border: 1px solid gray;
+	border-radius: 10px;
+	padding-left: 20px;
+	background-color :rgb(184, 194, 222);
+}
+
+.overview-page .page-content .charts .revenue .pie-chart,
+.overview-page .page-content .charts .expense .pie-chart{
+	width: auto;
+	height: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px  solid gray;
+	border-radius: 10px;
+	background-color: var(--primary-color-light);
+}
+
+.overview-page .page-content .charts .current-month{
+	width: 100%;
 	height: 50%;
 	display: flex;
 	flex-direction: column;
-	border: 1px solid black;
+	border: 1px solid gray;
+	border-radius: 10px;
 }
 
-.overview-page .page-content .charts .current-year .text{
+.overview-page .page-content .charts .current-month .text{
 	width: 100%;
 	height: 10%;
-	border: 1px solid black;
+	border: 1px solid gray;
 }
 
-.overview-page .page-content .charts .current-year .plot-balance{
+.overview-page .page-content .charts .current-month .plot-balance{
 	width: 100%;
 	height: 100%;
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--primary-color-light);
+	border-radius: 10px;
 }
 
-.overview-page .page-content .charts .current-year .plot-balance .plot{
-	width: 70%;
+.overview-page .page-content .charts .current-month .plot-balance .plot {
+	width: 100%;
 	height: 100%;
-	border: 1px solid black;
+	border-radius: 10px;
+}
+
+#balancePlot {
+	width: 100%;
+	height: 100%;
+}
+
+
+.overview-page .page-content .charts .current-month .plot-balance .plot canvas{
+	width: 100%;
+	height: 100%;
 } 
 
-.overview-page .page-content .charts .current-year .plot-balance .balance{
+.overview-page .page-content .charts .current-month .plot-balance .balance{
 	width: 30%;
 	height: 100%;
-	border: 1px solid black;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -477,11 +513,31 @@ body.dark .switch::before{
 	align-items: center;
 } 
 
-.overview-page .page-content .charts .current-year .plot-balance .balance .revenue-year, .expense-year, .summary-year{
+.overview-page .page-content .charts .current-month .plot-balance .balance .revenue-month, .expense-month, .summary-month{
 	width: 60%;
 	height: 25%;
 	border: 1px solid black;
 	border-radius: 10px;
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	align-items: center;
+}
+
+.overview-page .page-content .charts .current-month{
+	font-size: 2.2rem;
+}
+
+.overview-page .page-content .charts .revenue-month{
+	background-color: lightgreen;
+}
+
+.overview-page .page-content .charts .expense-month{
+	background-color: salmon;
+}
+
+.overview-page .page-content .charts .summary-month{
+	background-color: lightyellow;
 }
 
 /* ---- Add revenue page ---- */
