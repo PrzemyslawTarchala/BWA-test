@@ -13,10 +13,7 @@ class AppController extends AbstractController
 	public function loginAction(): void
 	{
 		if($this->request->hasPost()){
-			if($this->user->login()){
-				$this->overviewAction();
-				exit();
-			}
+			$this->user->login();
 		}
 		$this->view->render('login');
 	}
@@ -51,16 +48,16 @@ class AppController extends AbstractController
 	public function overviewAction(): void
 	{
 		$this->checkLoggins();
-		$this->data->updateOverviewCharts();
-		$this->data->updateTotalMonthIncomeExpenseDifference();
-
 		$this->view->render("overview");
 	}
 
 	public function analiticsAction(): void
 	{
-		$this->checkLoggins();
+		if($this->request->hasPost()){
+			$this->data->updateAnaliticsData();
+		}
 		$this->view->render("analitics");
+
 	}
 
 	public function logoutAction(): void

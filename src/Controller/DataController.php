@@ -14,6 +14,7 @@ use App\Model\DataModel;
 
 class DataController
 {
+	private const DEFAULT_DATA = "currentMonth";
 	private Request $request;
 	private DataModel $dataModel; 
 
@@ -24,16 +25,55 @@ class DataController
 		$this->request = $request;
 	}
 
-	public function updateOverviewCharts(): void 
+	public function updateOverviewData(): void //Always preapre data for current month
 	{
-		$_SESSION['incomeDoughnutChartData'] = $this->dataModel->overviewIncomePieChartOverview();
-		$_SESSION['expenseDoughnutChartData'] = $this->dataModel->overviewExpensePieChartOverview();
-		$_SESSION['balancePlotData'] = $this->dataModel->overwievBalancePlot();
+		$_SESSION['overviewData'] = [
+			'incomeDoughnutChartData' => $this->dataModel->overviewIncomePieChartOverview(),
+			'expenseDoughnutChartData' => $this->dataModel->overviewExpensePieChartOverview(),
+			'balancePlotData' => $this->dataModel->overwievBalancePlot(),
+			'monthIncome' => $this->dataModel->totalMonthIncome(),
+			'monthExpense' => $this->dataModel->totalMonthExpense(),
+			'monthDiffernce' => ($this->dataModel->totalMonthIncome() - $this->dataModel->totalMonthExpense())
+		];
 	}
 
-	public function updateTotalMonthIncomeExpenseDifference(): void 
+	public function updateAnaliticsData(): void 
 	{
-		$_SESSION['monthIncomeExpenseDifference'] = $this->dataModel->totalMonthIncomeDifference();
+		switch($_POST['analiticsPeriod']){
+			case('previoustMonth'):	
+				$this->getIncomeExpenseDataForPreviousMonth();
+				break;
+			case('currentYear'):
+				dump('currentYear');
+				exit();
+				break;
+			case('customDate'):
+				dump('customDate');
+				exit();
+				break;
+			default:
+				$_SESSION['AnaliticsData'] = [
+					'incomeData' => $this->dataModel->getIncomeData($startDate, $endDate),
+					'expenseData' => $this->dataModel->getExpenseData($startDate, $endDate)
+				];
+				break;
+		}
+	}
+
+	private function getIncomeExpenseDataForPreviousMonth(): void 
+	{ 
+		if(date('m') == 1){
+			$starDate = date('Y') -1 . '-12-01';
+			$endDate = date('Y') -1 . '-12-31';
+		} else {
+			$starDate = date('Y') . '-' .  date('m') - 1 . '-01';
+			$endDate = date('Y') . '-' . date('m') - 1 . (string) cal_days_in_month(CAL_GREGORIAN, date('m') - 1, date('Y'));
+ 		}
+
+		$_SESSION['AnaliticsData'] = [
+			'incomeData' => $this->dataModel->getIncomeData($startDate, $endDate),
+			'expenseData' => $this->dataModel->getExpenseData($startDate, $endDate)
+		];
 	}
 }
 

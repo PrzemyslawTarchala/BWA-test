@@ -7,9 +7,8 @@ namespace App\Controller;
 require_once("src/Controller/UserController.php");
 require_once("src/Controller/RevenueController.php");
 require_once("src/Controller/ExpenseController.php");
-require_once("src/Controller/DataController.php");
 require_once("src/Exception/ConfigurationException.php");
-
+require_once("src/Controller/DataController.php");
 
 require_once("src/Utils/debug.php");
 
@@ -17,9 +16,9 @@ use App\Request;
 use App\View;
 use App\Controller\UserController;
 use App\Controller\RevenueController;
-use App\Controller\DataController;
 use App\Controller\ExpenseController;
 use App\Exception\ConfigurationException;
+use App\Controller\DataController;
 
 abstract class AbstractController
 {
@@ -41,7 +40,7 @@ abstract class AbstractController
 
 		$this->request = $request;
 		$this->view = new View();
-		$this->user = new UserController(self::$configuration['db']);
+		$this->user = new UserController(self::$configuration['db'], $request);
 		$this->revenue = new RevenueController(self::$configuration['db'], $request);
 	  $this->expense = new ExpenseController(self::$configuration['db'], $request);
 		$this->data = new DataController(self::$configuration['db'], $request);

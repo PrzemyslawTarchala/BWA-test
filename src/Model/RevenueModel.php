@@ -28,7 +28,32 @@ class RevenueModel extends AbstractModel
     $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
     return array_unique($result);
 	}
+
+	// public function getCategoryNameById(array $categoryIds): array 
+	// {
+	// 	$categoryNames = [];
+  //   $placeholders = implode(',', array_fill(0, count($categoryIds), '?')); 
+  //   $query = "SELECT name FROM incomes_category_assigned_to_users WHERE id IN ($placeholders)";
+  //   $stmt = $this->conn->prepare($query);
+  //   $stmt->execute($categoryIds);
+  //   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  //   foreach ($result as $row) {
+  //       $categoryNames[] = $row['name'];
+  //   }
+  //   return $categoryNames;
+	// }
 	
+	private function getCategoryId(array $revenueData): int
+	{
+		$loggedUserId = $_SESSION['userId'];
+    $query = "SELECT id FROM incomes_category_assigned_to_users WHERE user_id = :user_id AND name = :category_name";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':user_id', $loggedUserId, PDO::PARAM_INT);
+    $stmt->bindParam(':category_name', $revenueData['category']);
+    $stmt->execute();
+    return (int) $stmt->fetchColumn();
+	}
+
 	private function insert(array $revenueData, int $categoryId): void
 	{
 		$loggedUserId = $_SESSION['userId'];

@@ -4,23 +4,30 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+require_once("src/Request.php");
 require_once("src/Model/UserModel.php");
 require_once("src/Auxiliary/Auxiliary.php");
+require_once("src/Controller/DataController.php");
+
 require_once("src/Utils/debug.php");
 
+use App\Request;
 use App\Model\UserModel;
 use App\Auxiliary\Auxiliary;
+use App\Controller\DataController;
 
 class UserController
 {
 	private UserModel $user;
+	private DataController $data;
 
-	public function __construct(array $config)
+	public function __construct(array $config, Request $request)
 	{
 		$this->user = new UserModel($config);
+		$this->data = new DataController($config, $request);
 	}
 
-	public function login(): bool
+	public function login(): void
 	{
 		$loginData = [
 			'username' => $_POST['username'],
@@ -30,14 +37,14 @@ class UserController
 		if($result = $this->user->login($loginData)) {
 			$_SESSION['userId'] = $result['id'];
 			$_SESSION['logged'] = true;
-			// Auxiliary::redirect("overview");
-			return true;
+			$this->data->updateOverviewData();
+			$this->data->updateAnaliticsData();
+			Auxiliary::redirect("overview");
 		} else {
 			$_SESSION['userId'] = 0;
 			$_SESSION['logged'] = false;
 			$_SESSION['message'] = "Wrong username or password.";
-			// Auxiliary::redirect("login");
-			return false;
+			Auxiliary::redirect("login");
 		}
 	}
 

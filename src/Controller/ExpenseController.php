@@ -7,21 +7,26 @@ namespace App\Controller;
 require_once("src/Model/ExpenseModel.php");
 require_once("src/Auxiliary/Auxiliary.php");
 require_once("src/Request.php");
+require_once("src/Controller/DataController.php");
+
 require_once("src/Utils/debug.php");
 
 use App\Model\ExpenseModel;
 use App\Auxiliary\Auxiliary;
 use App\Request;
+use App\Controller\RevenueController;
 
 class ExpenseController
 {
 	private ExpenseModel $expense;
 	private Request $request;
+	private DataController $data;
 
 	public function __construct(array $config, Request $request)
 	{
 		$this->expense = new ExpenseModel($config);
 		$this->request = $request;
+		$this->data = new DataController($config, $request);
 	}
 
 	public function addNewTransaction(): void
@@ -36,6 +41,8 @@ class ExpenseController
 			];
 			$this->validateData($expenseData);
 			$this->expense->addExpense($expenseData);
+			$this->data->updateOverviewData();
+			$this->data->updateAnaliticsData();
 		} else {
 			Auxiliary::redirect("addExpanse");
 		}
