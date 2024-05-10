@@ -20,7 +20,6 @@ class AppController extends AbstractController
 
 	public function registerAction(): void 
 	{
-		$this->checkLoggins();
 		if($this->request->hasPost()){
 			$this->user->register();
 		}

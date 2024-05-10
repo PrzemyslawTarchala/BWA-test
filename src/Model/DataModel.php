@@ -46,7 +46,7 @@ class DataModel extends AbstractModel
 
 		$query = "SELECT expenses_category_assigned_to_users.name, SUM(expenses.amount) AS expenseByCategory  
 		FROM expenses_category_assigned_to_users, expenses  WHERE expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id
-		AND expenses.date_of_expense BETWEEN '$this-> ' AND '$this->defaultEndCurrentMonthDate' AND expenses.user_id = :user_id
+		AND expenses.date_of_expense BETWEEN '$this->defaultStartCurrentMonthDate' AND '$this->defaultEndCurrentMonthDate' AND expenses.user_id = :user_id
 		GROUP BY expenses_category_assigned_to_users.name";
 
 		$stmt = $this->conn->prepare($query);
@@ -68,12 +68,31 @@ class DataModel extends AbstractModel
 		return $monthDailyBalance;
 	}
 
-	public function totalMonthIncome(): int 
+	// public function totalMonthIncome(): int 
+	// {
+	// 	$loggedUserId = $_SESSION['userId'];
+
+	// 	$query = "SELECT SUM(incomes.amount) AS monthIncome FROM incomes 
+	// 						WHERE incomes.date_of_income BETWEEN '$this->defaultStartCurrentMonthDate' AND '$this->defaultEndCurrentMonthDate' 
+	// 						AND incomes.user_id = :user_id";
+	// 	$stmt = $this->conn->prepare($query);
+	// 	$stmt->bindParam(':user_id', $loggedUserId, PDO::PARAM_INT);
+	// 	$stmt->execute();
+	// 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	// 	return (int) $result['monthIncome'];	
+	// }
+
+	public function totalIncome(string $startDate = null, string $endDate = null): int 
 	{
+		if($startDate === null || $endDate === null){
+			$startDate = $this->defaultStartCurrentMonthDate;
+			$endDate = $this->defaultEndCurrentMonthDate;
+		}
+
 		$loggedUserId = $_SESSION['userId'];
 
 		$query = "SELECT SUM(incomes.amount) AS monthIncome FROM incomes 
-							WHERE incomes.date_of_income BETWEEN '$this->defaultStartCurrentMonthDate' AND '$this->defaultEndCurrentMonthDate' 
+							WHERE incomes.date_of_income BETWEEN '$startDate' AND '$endDate' 
 							AND incomes.user_id = :user_id";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':user_id', $loggedUserId, PDO::PARAM_INT);
@@ -82,12 +101,32 @@ class DataModel extends AbstractModel
 		return (int) $result['monthIncome'];	
 	}
 
-	public function totalMonthExpense(): int 
+	// public function totalMonthExpense(): int 
+	// {
+	// 	$loggedUserId = $_SESSION['userId'];
+
+	// 	$query = "SELECT SUM(expenses.amount) AS monthExpense FROM expenses
+	// 	WHERE expenses.date_of_expense BETWEEN '$this->defaultStartCurrentMonthDate' AND '$this->defaultEndCurrentMonthDate' 
+	// 	AND expenses.user_id = :user_id";
+	// 	$stmt = $this->conn->prepare($query);
+	// 	$stmt->bindParam(':user_id', $loggedUserId, PDO::PARAM_INT);
+	// 	$stmt->execute();
+	// 	$result = $stmt->fetch(PDO::FETCH_ASSOC);
+	// 	return (int) $result['monthExpense'];	
+	// }
+
+	public function totalExpense(string $startDate = null, string $endDate = null): int 
 	{
+
+		if($startDate === null || $endDate === null){
+			$startDate = $this->defaultStartCurrentMonthDate;
+			$endDate = $this->defaultEndCurrentMonthDate;
+		}
+
 		$loggedUserId = $_SESSION['userId'];
 
 		$query = "SELECT SUM(expenses.amount) AS monthExpense FROM expenses
-		WHERE expenses.date_of_expense BETWEEN '$this->defaultStartCurrentMonthDate' AND '$this->defaultEndCurrentMonthDate' 
+		WHERE expenses.date_of_expense BETWEEN '$startDate' AND '$endDate' 
 		AND expenses.user_id = :user_id";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':user_id', $loggedUserId, PDO::PARAM_INT);
@@ -98,7 +137,8 @@ class DataModel extends AbstractModel
 
 	public function getIncomeData(string $startDate = null, string $endDate = null): array
 	{
-		if($startDate == null || $endDate == null){
+
+		if($startDate === null || $endDate === null){
 			$startDate = $this->defaultStartCurrentMonthDate;
 			$endDate = $this->defaultEndCurrentMonthDate;
 		}
