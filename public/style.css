@@ -40,6 +40,11 @@ body.dark .search-box input{
 	color: white;
 }
 
+.message-window{
+	position: relative;
+	color: #695CFE;
+} 
+
 /* ---- Login - register section ---- */
 
 .login-register{
@@ -49,10 +54,6 @@ body.dark .search-box input{
 	justify-content: center;
 	align-items: center;
 }
-
-/* .login-register .message-window{
-	
-} */
 
 .input-window{
 	height: 430px;

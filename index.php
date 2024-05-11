@@ -25,17 +25,17 @@ try{
 	(new AppController($request)) -> run();
 } 
 
-catch(AppException $e){
-	echo "<h2>Application Error</h2><br>";
-	echo "$e";
-}
-
 catch(ConfigurationException $e){
-	echo "<h2>Application Error</h2><br>";
-	echo "$e";
+	echo "<h2>Configuration Error</h2><br>";
+	// echo "$e";
 }
 
 catch(StorageException $e){
+	echo "<h2>Storage Error</h2><br>";
+	//echo "$e";
+}
+
+catch(AppException $e){
 	echo "<h2>Application Error</h2><br>";
-	echo "$e";
+	// echo "$e";
 }

@@ -8,6 +8,7 @@ require_once("src/Request.php");
 require_once("src/Model/UserModel.php");
 require_once("src/Auxiliary/Auxiliary.php");
 require_once("src/Controller/DataController.php");
+require_once("src/Exception/AppException.php");
 
 require_once("src/Utils/debug.php");
 
@@ -15,6 +16,7 @@ use App\Request;
 use App\Model\UserModel;
 use App\Auxiliary\Auxiliary;
 use App\Controller\DataController;
+use App\Exception\AppException;
 
 class UserController
 {

@@ -9,6 +9,8 @@ require_once("src/Controller/RevenueController.php");
 require_once("src/Controller/ExpenseController.php");
 require_once("src/Controller/DataController.php");
 require_once("src/Exception/ConfigurationException.php");
+require_once("src/Exception/StorageException.php");
+require_once("src/Exception/AppException.php");
 
 require_once("src/Utils/debug.php");
 
@@ -19,6 +21,9 @@ use App\Controller\RevenueController;
 use App\Controller\ExpenseController;
 use App\Controller\DataController;
 use App\Exception\ConfigurationException;
+use App\Exception\StorageException;
+use App\Exception\AppException;
+use Thorwable;
 
 abstract class AbstractController
 {
@@ -31,6 +36,11 @@ abstract class AbstractController
 	protected RevenueController $revenue;
 	protected ExpenseController $expense;
 	protected DataController $data;
+
+	public static function initConfiguration(array $configuration): void
+	{
+		self::$configuration = $configuration;
+	}
 
 	public function __construct(Request $request)
 	{
@@ -46,11 +56,6 @@ abstract class AbstractController
 		$this->data = new DataController(self::$configuration['db'], $request);
 	}
 
-	public static function initConfiguration(array $configuration): void
-	{
-		self::$configuration = $configuration;
-	}
-
 	protected function checkLoggins(): void 
 	{
 		if(isset($_SESSION['userId']) && $_SESSION['userId'] > 0){ 
@@ -59,18 +64,24 @@ abstract class AbstractController
 		} 
 	}
 
+	final public function run(): void 
+	{
+		try{
+			$action = $this->action() . 'Action';
+			if(!method_exists ($this, $action)){
+				$action = self::DEFAULT_ACTION . 'Action';
+			}
+			$this->$action();
+		}	catch(AppException $e) {
+			throw new AppException();
+		} catch(StorageException $e) {
+			throw new StorageException();
+		}
+	}
+
 	private function action(): string
 	{
 		return $this->request->getParam('action', self::DEFAULT_ACTION);
 	}
 	
-	final public function run(): void 
-	{
-		$action = $this->action() . 'Action';
-		if(!method_exists ($this, $action)){
-			$action = self::DEFAULT_ACTION . 'Action';
-		}
-		$this->$action();	
-	}
-
 }
