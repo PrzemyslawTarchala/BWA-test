@@ -44,4 +44,4 @@ class AbstractModel
 			throw new ConfigurationException('Storage configuration error');
 		}
 	}
-}
+} 

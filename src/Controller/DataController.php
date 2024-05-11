@@ -20,20 +20,20 @@ class DataController
 
 	public function __construct(array $config, Request $request)
 	{
+		$this->request = $request;
 		$this->dataModel = new DataModel($config);
 		$this->dataModel->setDefault();
-		$this->request = $request;
 	}
 
 	public function updateOverviewData(): void //Always preapre data for current month
 	{
 		$_SESSION['overviewData'] = [
-			'incomeDoughnutChartData' => $this->dataModel->overviewIncomePieChartOverview(),
+			'incomeDoughnutChartData'	 => $this->dataModel->overviewIncomePieChartOverview(),
 			'expenseDoughnutChartData' => $this->dataModel->overviewExpensePieChartOverview(),
-			'balancePlotData' => $this->dataModel->overwievBalancePlot(),
-			'monthIncome' => $this->dataModel->totalIncome(),
-			'monthExpense' => $this->dataModel->totalExpense(),
-			'monthDiffernce' => ($this->dataModel->totalIncome() - $this->dataModel->totalExpense())
+			'balancePlotData'					 => $this->dataModel->overwievBalancePlot(),
+			'monthIncome' 				 		 => $this->dataModel->totalIncome(),
+			'monthExpense'						 => $this->dataModel->totalExpense(),
+			'monthDiffernce'					 => ($this->dataModel->totalIncome() - $this->dataModel->totalExpense())
 		];
 	}
 
@@ -47,26 +47,15 @@ class DataController
 		switch($_POST['analiticsPeriod']){
 			case('previoustMonth'):	
 				$this->getIncomeExpenseDataForPreviousMonth();
-				// dump(111);
-				// exit();
 				break;
 			case('currentYear'):
 				$this->getIncomeExpenseDataForCurrentYear();
-				// dump(112);
-				// exit();
 				break;
 			case('customDate'):
 				$this->getIncomeExpenseDataForCustomDate();
-				// dump(113);
-				// exit();
 				break;
 			default:
-				$_SESSION['AnaliticsData'] = [
-					'incomeData' => $this->dataModel->getIncomeData(),
-					'expenseData' => $this->dataModel->getExpenseData(),
-					'totalIncome' => $this->dataModel->totalIncome(),
-					'totalExpense' => $this->dataModel->totalExpense(),
-				];
+				$this->getIncomeExpenseDataForCurrentMonth();
 				break;
 		}
 	}
@@ -82,10 +71,12 @@ class DataController
 		}
 
 		$_SESSION['AnaliticsData'] = [
-				'incomeData' => $this->dataModel->getIncomeData($startDate, $endDate),
-				'expenseData' => $this->dataModel->getExpenseData($startDate, $endDate),
-				'totalIncome' => $this->dataModel->totalIncome($startDate, $endDate),
-				'totalExpense' => $this->dataModel->totalExpense($startDate, $endDate),
+			'incomeData'	 => $this->dataModel->getIncomeData($startDate, $endDate),
+			'expenseData'  => $this->dataModel->getExpenseData($startDate, $endDate),
+			'totalIncome'  => $this->dataModel->totalIncome($startDate, $endDate),
+			'totalExpense' => $this->dataModel->totalExpense($startDate, $endDate),
+			'startDate' 	 => $startDate,
+			'endDate' 		 => $endDate
 		];
 	}
 
@@ -95,24 +86,40 @@ class DataController
 		$endDate = date('Y') . '-12-31';
 
 		$_SESSION['AnaliticsData'] = [
-			'incomeData' => $this->dataModel->getIncomeData($startDate, $endDate),
-			'expenseData' => $this->dataModel->getExpenseData($startDate, $endDate),
-			'totalIncome' => $this->dataModel->totalIncome($startDate, $endDate),
+			'incomeData'	 => $this->dataModel->getIncomeData($startDate, $endDate),
+			'expenseData'  => $this->dataModel->getExpenseData($startDate, $endDate),
+			'totalIncome'  => $this->dataModel->totalIncome($startDate, $endDate),
 			'totalExpense' => $this->dataModel->totalExpense($startDate, $endDate),
-	];
+			'startDate'		 => $startDate,
+			'endDate' 		 => $endDate
+		];
 	}
 
 	private function getIncomeExpenseDataForCustomDate(): void 
 	{
-		$startDate = $_POST['costumStartDate'];
-		$endDate = $_POST['costumEndDate'];
+		$startDate = $this->request->postParam('costumStartDate');
+		$endDate = $this->request->postParam('costumEndDate');
 
 		$_SESSION['AnaliticsData'] = [
-			'incomeData' => $this->dataModel->getIncomeData($startDate, $endDate),
-			'expenseData' => $this->dataModel->getExpenseData($startDate, $endDate),
-			'totalIncome' => $this->dataModel->totalIncome($startDate, $endDate),
+			'incomeData'	 => $this->dataModel->getIncomeData($startDate, $endDate),
+			'expenseData'  => $this->dataModel->getExpenseData($startDate, $endDate),
+			'totalIncome'  => $this->dataModel->totalIncome($startDate, $endDate),
 			'totalExpense' => $this->dataModel->totalExpense($startDate, $endDate),
-	];
+			'startDate'	 	 => $startDate,
+			'endDate'			 => $endDate
+		];
+	}
+
+	private function getIncomeExpenseDataForCurrentMonth(): void 
+	{
+		$_SESSION['AnaliticsData'] = [
+			'incomeData' 		=> $this->dataModel->getIncomeData(),
+			'expenseData'	  => $this->dataModel->getExpenseData(),
+			'totalIncome' 	=> $this->dataModel->totalIncome(),
+			'totalExpense'  => $this->dataModel->totalExpense(),
+			'startDate' 		=> date('Y') . '-' . date('m') . '-01',
+			'endDate' 		  => date('Y') . '-' . date('m') . '-' . (string) cal_days_in_month(CAL_GREGORIAN, (int) date('m'), (int) date('Y'))
+		];
 	}
 }
 

@@ -11,7 +11,7 @@ use PDO;
 
 class ExpenseModel extends AbstractModel
 {
-	public function addExpense(array $expenseData)
+	public function addExpense(array $expenseData): void
 	{
 		$categoryId = $this->getCategoryId($expenseData);
 		$paymentMethodId = $this->getPaymentMethodId($expenseData);

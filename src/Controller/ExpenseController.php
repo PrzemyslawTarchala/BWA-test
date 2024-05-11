@@ -11,21 +11,21 @@ require_once("src/Controller/DataController.php");
 
 require_once("src/Utils/debug.php");
 
+use App\Request;
 use App\Model\ExpenseModel;
 use App\Auxiliary\Auxiliary;
-use App\Request;
 use App\Controller\RevenueController;
 
 class ExpenseController
 {
-	private ExpenseModel $expense;
 	private Request $request;
+	private ExpenseModel $expenseModel;
 	private DataController $data;
 
 	public function __construct(array $config, Request $request)
 	{
-		$this->expense = new ExpenseModel($config);
 		$this->request = $request;
+		$this->expenseModel = new ExpenseModel($config);
 		$this->data = new DataController($config, $request);
 	}
 
@@ -33,14 +33,14 @@ class ExpenseController
 	{
 		if($this->request->isPost()){
 			$expenseData = [
-				'amount' => $_POST['amount'] ?? '',
-				'paymentMethod' => $_POST['paymentMethod'] ?? '',
-				'date' => $_POST['date'] ?? '',
-				'category' => $_POST['category'] ?? '',
-				'comment' => $_POST['comment'] ?? ''
+				'amount' 				=> $this->request->postParam('amount'),
+				'paymentMethod' => $this->request->postParam('paymentMethod'),
+				'date' 					=> $this->request->postParam('date'),
+				'category'		 	=> $this->request->postParam('category'),
+				'comment' 			=> $this->request->postParam('comment')
 			];
 			$this->validateData($expenseData);
-			$this->expense->addExpense($expenseData);
+			$this->expenseModel->addExpense($expenseData);
 			$this->data->updateOverviewData();
 			$this->data->updateAnaliticsData();
 		} else {

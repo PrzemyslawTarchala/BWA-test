@@ -18,37 +18,20 @@ class RevenueModel extends AbstractModel
 		$this->insert($revenueData, $categoryId);
 	}
 
-	public function getIncomesCategory(): array
-	{
-    $loggedUserId = $_SESSION['userId'];
-    $query = "SELECT income_category_assigned_to_user_id FROM incomes WHERE user_id = :user_id";
-    $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':user_id', $loggedUserId, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    return array_unique($result);
-	}
-
-	// public function getCategoryNameById(array $categoryIds): array 
-	// {
-	// 	$categoryNames = [];
-  //   $placeholders = implode(',', array_fill(0, count($categoryIds), '?')); 
-  //   $query = "SELECT name FROM incomes_category_assigned_to_users WHERE id IN ($placeholders)";
-  //   $stmt = $this->conn->prepare($query);
-  //   $stmt->execute($categoryIds);
-  //   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  //   foreach ($result as $row) {
-  //       $categoryNames[] = $row['name'];
-  //   }
-  //   return $categoryNames;
-	// }
-	
 	private function getCategoryId(array $revenueData): int
 	{
-		$loggedUserId = $_SESSION['userId'];
-    $query = "SELECT id FROM incomes_category_assigned_to_users WHERE user_id = :user_id AND name = :category_name";
+    $query = "
+			SELECT 
+				id 
+			FROM 
+				incomes_category_assigned_to_users 
+			WHERE 
+				user_id = :user_id 
+				AND name = :category_name
+		";
+
     $stmt = $this->conn->prepare($query);
-    $stmt->bindParam(':user_id', $loggedUserId, PDO::PARAM_INT);
+    $stmt->bindParam(':user_id', $_SESSION['userId'], PDO::PARAM_INT);
     $stmt->bindParam(':category_name', $revenueData['category']);
     $stmt->execute();
     return (int) $stmt->fetchColumn();
@@ -56,11 +39,15 @@ class RevenueModel extends AbstractModel
 
 	private function insert(array $revenueData, int $categoryId): void
 	{
-		$loggedUserId = $_SESSION['userId'];
-		$query = "INSERT INTO incomes (user_id, income_category_assigned_to_user_id, amount, date_of_income, income_comment)
-							VALUES (:user_id, :category_id, :amount, :date_of_income, :income_comment)";
+		$query = "
+			INSERT INTO 
+				incomes (user_id, income_category_assigned_to_user_id, amount, date_of_income, income_comment)
+			VALUES 
+				(:user_id, :category_id, :amount, :date_of_income, :income_comment)
+		";
+		
 		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(':user_id', $loggedUserId, PDO::PARAM_INT);
+		$stmt->bindParam(':user_id', $_SESSION['userId'], PDO::PARAM_INT);
 		$stmt->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
 		$stmt->bindParam(':amount', $revenueData['amount']);
 		$stmt->bindParam(':date_of_income', $revenueData['date']);

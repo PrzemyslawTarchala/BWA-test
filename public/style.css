@@ -17,8 +17,7 @@
 
 	--tran-02: all 0.2s ease;
 	--tran-03: all 0.3s ease;
-	--tran-04: all 0.4s ease;
-	--tran-05: all 0.5s ease;
+	--tran-04: all 0.4s ease; 
 }
 
 body{
@@ -1072,7 +1071,8 @@ body.dark .switch::before{
 	gap: 20px;
 }
 
-.analitics-page .page-content .time-period{
+.analitics-page .page-content .time-period,
+.analitics-page .page-content .total{
 	width: 100%;
 	height: auto;
 	display: flex;
@@ -1100,6 +1100,7 @@ body.dark .switch::before{
 	background-color: salmon;
 }
 
+
 .analitics-page .page-content .analitics-content .display{
 	width: 100%;
 	display: flex;
@@ -1109,6 +1110,19 @@ body.dark .switch::before{
 	border: 1px solid black;
 	border-radius: 15px;
 	padding: 10px;
+}
+
+.analitics-page .page-content .analitics-content .total .display{
+	width: 100%;
+	padding-left: 80px;
+	display: flex;
+	justify-content: start;
+	gap: 100px;
+}
+
+.analitics-page .page-content .analitics-content .total .display .date{
+	display: flex;
+	gap: 30px;
 }
 
 .analitics-page .page-content .time-period button{
@@ -1127,6 +1141,7 @@ body.dark .switch::before{
 	border: 1px solid darkgrey;
 	border-radius: 15px;
 	cursor: pointer;
+	padding: 10px;
 }
 
 .analitics-page .page-content .analitics-content .incomes,

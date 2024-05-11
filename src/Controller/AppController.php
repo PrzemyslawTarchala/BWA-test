@@ -12,6 +12,7 @@ class AppController extends AbstractController
 {
 	public function loginAction(): void
 	{
+		$this->checkLoggins();
 		if($this->request->hasPost()){
 			$this->user->login();
 		}
@@ -28,7 +29,6 @@ class AppController extends AbstractController
 
 	public function addRevenueAction(): void 
 	{
-		$this->checkLoggins();
 		if($this->request->hasPost()){
 			$this->revenue->addNewTransaction();
 		}
@@ -37,7 +37,6 @@ class AppController extends AbstractController
 
 	public function addExpenseAction(): void
 	{
-		$this->checkLoggins();
 		if($this->request->hasPost()){
 			$this->expense->addNewTransaction();
 		}
@@ -46,7 +45,6 @@ class AppController extends AbstractController
 
 	public function overviewAction(): void
 	{
-		$this->checkLoggins();
 		$this->view->render("overview");
 	}
 
@@ -61,7 +59,6 @@ class AppController extends AbstractController
 
 	public function logoutAction(): void
 	{
-		$this->checkLoggins();
 		$this->user->logout();
 	}
 

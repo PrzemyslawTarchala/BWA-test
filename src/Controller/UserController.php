@@ -18,23 +18,25 @@ use App\Controller\DataController;
 
 class UserController
 {
-	private UserModel $user;
+	private Request $request;
+	private UserModel $userModel;
 	private DataController $data;
 
 	public function __construct(array $config, Request $request)
 	{
-		$this->user = new UserModel($config);
+		$this->request = $request;
+		$this->userModel = new UserModel($config);
 		$this->data = new DataController($config, $request);
 	}
 
 	public function login(): void
 	{
 		$loginData = [
-			'username' => $_POST['username'],
-			'password' => $_POST['password']
+			'username' => $this->request->postParam('username'),
+			'password' => $this->request->postParam('password')
 		];
 
-		if($result = $this->user->login($loginData)) {
+		if($result = $this->userModel->login($loginData)) {
 			$_SESSION['userId'] = $result['id'];
 			$_SESSION['logged'] = true;
 			$this->data->updateOverviewData();
@@ -51,14 +53,14 @@ class UserController
 	public function register(): void 
 	{
 		$registerData = [
-			'username' => $_POST['newUsername'],
-			'email' => $_POST['newEmail'],
-			'password' => $_POST['password'],
-			'confirmPassword' => $_POST['confirmPassword']
-		];
+			'username' => $this->request->postParam('newUsername'),
+			'email'	=> $this->request->postParam('newEmail'),
+			'password' => $this->request->postParam('password'),
+			'confirmPassword' => $this->request->postParam('confirmPassword')
+		];	
 
 		$this->registerValidation($registerData);
-		$this->assignDefaultSettings($this->user->register($registerData));
+		$this->assignDefaultSettings($this->userModel->register($registerData));
 		$_SESSION['message'] = "Registration correct! :)";
 		Auxiliary::redirect("login");
 	}
@@ -78,7 +80,7 @@ class UserController
 			Auxiliary::redirect("register");
 		}
 
-		if($this->user->isNewUsernameAvailiabity($registerData['username'])){
+		if($this->userModel->isNewUsernameAvailiabity($registerData['username'])){
 			$_SESSION['message'] = "Login already exists";
 			Auxiliary::redirect("register");
 		} 
@@ -88,7 +90,7 @@ class UserController
 			Auxiliary::redirect("register");
 		}
 
-		if($this->user->isNewEmailAvailiabity($registerData['email'])){
+		if($this->userModel->isNewEmailAvailiabity($registerData['email'])){
 			$_SESSION['message'] = "Email already exists";
 			Auxiliary::redirect("register");
 		} 
@@ -106,8 +108,8 @@ class UserController
 
 	private function assignDefaultSettings(int $userId): void
 	{
-		$this->user->assignDefaultRevenueCategory($userId);
-		$this->user->assignDefaultExpenseCategory($userId);
-		$this->user->assignDefaultPaymentMethods($userId);
+		$this->userModel->assignDefaultRevenueCategory($userId);
+		$this->userModel->assignDefaultExpenseCategory($userId);
+		$this->userModel->assignDefaultPaymentMethods($userId);
 	}
  }

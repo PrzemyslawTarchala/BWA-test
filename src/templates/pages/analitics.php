@@ -41,20 +41,48 @@
 				</div>
 			</div>
 
+			<div class="total">
+				<div class="header">
+					<h3>Total</h3>
+				</div>
+				<div class="display">
+					<div class="date">
+						<div>
+							<h4>Form: <?php echo $_SESSION['AnaliticsData']['startDate']?></h4>
+						</div>
+						<div>
+							<h4>To: <?php echo $_SESSION['AnaliticsData']['endDate']?></h4>
+						</div>
+					</div>
+					<div>
+						<h4>Total Income: <?php echo $_SESSION['AnaliticsData']['totalIncome']?> $</h4>
+					</div>
+					<div>
+						<h4>Total Expense: <?php echo $_SESSION['AnaliticsData']['totalExpense']?> $</h4>
+					</div>
+				</div>
+			</div>
+
 			<div class="incomes">
 				<div class="header">
 					<h3>Incomes</h3>
 				</div>
 				<div class="display">
-					<?php for($i = sizeof($_SESSION['AnaliticsData']['incomeData']) - 1; $i >= 0; --$i) : ?>
+					<?php if(empty($_SESSION['AnaliticsData']['incomeData'])) :?>
 						<ul class="listOfIncome">
-							<li class="name"><?php echo $_SESSION['AnaliticsData']['incomeData'][$i]['name']; ?></li>
-							<li class="amountt"><i class='bx bx-dollar'></i><?php echo $_SESSION['AnaliticsData']['incomeData'][$i]['amount']; ?></li>
-							<li class="date"><?php echo $_SESSION['AnaliticsData']['incomeData'][$i]['date_of_income']; ?></li>
-							<li class="commentt"><?php echo $_SESSION['AnaliticsData']['incomeData'][$i]['income_comment']; ?></li>
-							<li class="edit"><i class='bx bx-edit-alt'></i></li>
+							<li><strong>No incomes</strong></li>
 						</ul>
-					<?php endfor; ?>
+					<?php else: ?>
+						<?php for($i = sizeof($_SESSION['AnaliticsData']['incomeData']) - 1; $i >= 0; --$i) : ?>
+							<ul class="listOfIncome">
+								<li class="name"><?php echo $_SESSION['AnaliticsData']['incomeData'][$i]['name']; ?></li>
+								<li class="amountt"><i class='bx bx-dollar'></i><?php echo $_SESSION['AnaliticsData']['incomeData'][$i]['amount']; ?></li>
+								<li class="date"><?php echo $_SESSION['AnaliticsData']['incomeData'][$i]['date_of_income']; ?></li>
+								<li class="commentt"><?php echo $_SESSION['AnaliticsData']['incomeData'][$i]['income_comment']; ?></li>
+								<li class="edit"><i class='bx bx-edit-alt'></i></li>
+							</ul>
+						<?php endfor; ?>
+					<?php endif; ?>
 				</div>
 			</div>
 			<div class="expenses">
@@ -62,16 +90,22 @@
 					<h3>Expenses</h3>
 				</div>
 				<div class="display">
-					<?php for($i = sizeof($_SESSION['AnaliticsData']['expenseData']) - 1; $i >= 0; --$i) : ?>
+					<?php if(empty($_SESSION['AnaliticsData']['expenseData'])) :?>
 						<ul class="listOfExpense">
-							<li class="name"><?php echo $_SESSION['AnaliticsData']['expenseData'][$i]['name']; ?></li>
-							<li class="amountt"><i class='bx bx-dollar'></i><?php echo $_SESSION['AnaliticsData']['expenseData'][$i]['amount']; ?></li>
-							<li class="date"><?php echo $_SESSION['AnaliticsData']['expenseData'][$i]['date_of_expense']; ?></li>
-							<li class="paymetMethod"><?php echo $_SESSION['AnaliticsData']['expenseData'][$i]['paymentMethod']; ?></li>
-							<li class="commentt"><?php echo $_SESSION['AnaliticsData']['expenseData'][$i]['expense_comment']; ?></li>
-							<li class="edit"><i class='bx bx-edit-alt'></i></li>
+							<li><strong>No expenses</strong></li>
 						</ul>
-					<?php endfor; ?>
+					<?php else: ?>
+						<?php for($i = sizeof($_SESSION['AnaliticsData']['expenseData']) - 1; $i >= 0; --$i) : ?>
+							<ul class="listOfExpense">
+								<li class="name"><?php echo $_SESSION['AnaliticsData']['expenseData'][$i]['name']; ?></li>
+								<li class="amountt"><i class='bx bx-dollar'></i><?php echo $_SESSION['AnaliticsData']['expenseData'][$i]['amount']; ?></li>
+								<li class="date"><?php echo $_SESSION['AnaliticsData']['expenseData'][$i]['date_of_expense']; ?></li>
+								<li class="paymetMethod"><?php echo $_SESSION['AnaliticsData']['expenseData'][$i]['paymentMethod']; ?></li>
+								<li class="commentt"><?php echo $_SESSION['AnaliticsData']['expenseData'][$i]['expense_comment']; ?></li>
+								<li class="edit"><i class='bx bx-edit-alt'></i></li>
+							</ul>
+						<?php endfor; ?>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>

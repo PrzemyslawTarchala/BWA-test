@@ -11,21 +11,21 @@ require_once("src/Controller/DataController.php");
 
 require_once("src/Utils/debug.php");
 
+use App\Request;
 use App\Model\RevenueModel;
 use App\Auxiliary\Auxiliary;
-use App\Request;
 use App\Controller\DataController;
 
 class RevenueController
 {
-	private RevenueModel $revenue;
 	private Request $request;
+	private RevenueModel $revenueModel;
 	private DataController $data;
 
 	public function __construct(array $config, Request $request)
 	{
-		$this->revenue = new RevenueModel($config);
 		$this->request = $request;
+		$this->revenueModel = new RevenueModel($config);
 		$this->data = new DataController($config, $request);
 	}
 
@@ -33,13 +33,14 @@ class RevenueController
 	{
 		if($this->request->isPost()){
 			$revenueData = [
-				'amount' => $_POST['amount'] ?? '',
-				'date' => $_POST['date'] ?? '',
-				'category' => $_POST['source'] ?? '',
-				'comment' => $_POST['comment'] ?? ''
+				'amount'	 	=> $this->request->postParam('amount'),
+				'date' 			=> $this->request->postParam('date'),
+				'category' 	=> $this->request->postParam('source'),
+				'comment' 	=> $this->request->postParam('comment')
 			];
+			
 			$this->validateData($revenueData);
-			$this->revenue->addRevenue($revenueData);
+			$this->revenueModel->addRevenue($revenueData);
 			$this->data->updateOverviewData();
 			$this->data->updateAnaliticsData();
 		}
