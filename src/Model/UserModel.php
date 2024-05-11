@@ -2,18 +2,32 @@
 
 declare(strict_types=1);
 
-session_start();
+namespace App\Model;
 
-class UserModel
+require_once("src/Model/AbstractModel.php");
+require_once("src/Utils/debug.php");
+
+use PDO;
+use App\Model\AbstractModel;
+
+class UserModel extends AbstractModel
 {
-	private $conn;
-
-	public function __construct()
+	public function login(array $loginData): array
 	{
-		$this->createConnectionToDB();
+		$query = "SELECT users.id FROM users WHERE username = :username AND password = :password";
+		$stmt = $this->conn->prepare($query);
+		$stmt->bindParam(':username', $loginData['username']);
+		$stmt->bindParam(':password', $loginData['password']);
+		$stmt->execute();
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		if(!$result){
+			return [];
+		} else {
+			return $result;
+		}
 	}
 
-	public function register(array $registerData): void 
+	public function register(array $registerData): int
 	{	
 		$query = "INSERT INTO users(username, password, email) VALUES(:username, :password, :email)";
     $stmt = $this->conn->prepare($query);
@@ -21,6 +35,7 @@ class UserModel
     $stmt->bindParam(':password', $registerData['password']);
     $stmt->bindParam(':email', $registerData['email']);
     $stmt->execute();
+		return (int) $this->conn->lastInsertId();
 	}
 
 	public function isNewUsernameAvailiabity(string $newUsername): bool
@@ -53,33 +68,34 @@ class UserModel
 		}
 	}
 
-	public function login(array $loginData): bool
+	public function assignDefaultRevenueCategory(int $userId): void
 	{
-		$query = "SELECT users.id FROM users WHERE username = :username AND password = :password";
-		$stmt = $this->conn->prepare($query);
-		$stmt->bindParam(':username', $loginData['username']);
-		$stmt->bindParam(':password', $loginData['password']);
-		$stmt->execute();
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		$query = "INSERT INTO incomes_category_assigned_to_users (user_id, name)
+              SELECT :userId, name FROM incomes_category_default";
 
-		if($result != 0){
-			return true;
-		} else {
-			return false;
-		} 
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->execute();
 	}
 
-	private function createConnectionToDB(): void
+	public function assignDefaultExpenseCategory(int $userId): void
 	{
-		$config = require_once("../../config/config.php");
-		$dsn = "mysql:dbname={$config['db']['database']};host={$config['db']['host']}";
-		$this->conn = new PDO(
-			$dsn,
-			$config['db']['user'],
-			$config['db']['password'],
-			[
-				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION 
-			]
-		);
+		$query = "INSERT INTO expenses_category_assigned_to_users (user_id, name)
+              SELECT :userId, name FROM expenses_category_default";
+							
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->execute();
 	}
-}
+
+	public function assignDefaultPaymentMethods(int $userId): void
+	{
+		$query = "INSERT INTO payment_methods_assigned_to_users (user_id, name)
+              SELECT :userId, name FROM payment_methods_default";
+							
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+	}
+ }
+ 

@@ -2,27 +2,68 @@
 
 declare(strict_types=1);
 
-session_start();
+namespace App\Controller;
 
-require_once("src/View.php");
+require_once("src/Utils/debug.php");
 
-class AppController
+use App\Controller\AbstractController;
+
+class AppController extends AbstractController
 {
-	private View $view;
-
-	public function __construct()
+	public function loginAction(): void
 	{
-		$this->view = new View;
-	}
-	
-	public function run(): void 
-	{
-		if($_SESSION['logged']){
-			$this->view->render("overview");
-		} else {
-			$this->view->render("sign_in");
+		$this->checkLoggins();
+		if($this->request->hasPost()){
+			$this->user->login();
 		}
-		
+		$this->view->render('login');
 	}
 
+	public function registerAction(): void 
+	{
+		if($this->request->hasPost()){
+			$this->user->register();
+		}
+		$this->view->render('register');
+	}
+
+	public function addRevenueAction(): void 
+	{
+		if($this->request->hasPost()){
+			$this->revenue->addNewTransaction();
+		}
+		$this->view->render("addRevenue");
+	}
+
+	public function addExpenseAction(): void
+	{
+		if($this->request->hasPost()){
+			$this->expense->addNewTransaction();
+		}
+		$this->view->render("addExpense");
+	}
+
+	public function overviewAction(): void
+	{
+		$this->view->render("overview");
+	}
+
+	public function analiticsAction(): void
+	{
+		if($this->request->hasPost()){
+			$this->data->updateAnaliticsData();
+		}
+		$this->view->render("analitics");
+
+	}
+
+	public function logoutAction(): void
+	{
+		$this->user->logout();
+	}
+
+	private function updateData(): void 
+	{
+		$this->revenue->updateRevenueData(); 
+	}
 }

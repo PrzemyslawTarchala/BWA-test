@@ -17,8 +17,7 @@
 
 	--tran-02: all 0.2s ease;
 	--tran-03: all 0.3s ease;
-	--tran-04: all 0.4s ease;
-	--tran-05: all 0.5s ease;
+	--tran-04: all 0.4s ease; 
 }
 
 body{
@@ -41,6 +40,11 @@ body.dark .search-box input{
 	color: white;
 }
 
+.message-window{
+	position: relative;
+	color: #695CFE;
+} 
+
 /* ---- Login - register section ---- */
 
 .login-register{
@@ -50,10 +54,6 @@ body.dark .search-box input{
 	justify-content: center;
 	align-items: center;
 }
-
-/* .login-register .message-window{
-	
-} */
 
 .input-window{
 	height: 430px;
@@ -389,12 +389,9 @@ body.dark .switch::before{
 	position: fixed;
 	height: 95%;
 	width: 93%;
-	/* width: calc(100%-250px); */
 	background: var(--body-color);
 	transition: var(--tran-05);
 	margin: 20px 20px 20px 110px;
-	/* border: 1px solid #E4E9F7; */
-	border: 1px solid black;
 	border-radius: 5px;
 }
 
@@ -412,12 +409,17 @@ body.dark .switch::before{
 	width: 95%;
 	display: flex; 
 	justify-content: space-between;
-	border: 1px solid black;
+	background-color :rgb(184, 194, 222);
+	border: 1px solid gray;
 	border-radius: 10px;
 }
 
+.overview-page .page-content .theme h2{
+	padding-left: 20px;
+	font-size: 2rem;
+}
+
 .overview-page .page-content .charts{
-	border: 1px solid black;
 	width: 95%;
 	height: 90%;
 	display: flex;
@@ -431,45 +433,79 @@ body.dark .switch::before{
 	width: 100%;
 	height: 45%;
 	display: flex;
-	border: 1px solid black;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 .overview-page .page-content .charts .revenue, .expense {
 	width: 45%;
-	border: 1px solid black;
 }
 
-.overview-page .page-content .charts .current-year{
-	width: 95%;
+.overview-page .page-content .charts .revenue .title,
+.overview-page .page-content .charts .expense .title {
+	width: 100%;
+	border: 1px solid gray;
+	border-radius: 10px;
+	padding-left: 20px;
+	background-color :rgb(184, 194, 222);
+}
+
+.overview-page .page-content .charts .revenue .pie-chart,
+.overview-page .page-content .charts .expense .pie-chart{
+	width: auto;
+	height: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px  solid gray;
+	border-radius: 10px;
+	background-color: var(--primary-color-light);
+}
+
+.overview-page .page-content .charts .current-month{
+	width: 100%;
 	height: 50%;
 	display: flex;
 	flex-direction: column;
-	border: 1px solid black;
+	border: 1px solid gray;
+	border-radius: 10px;
 }
 
-.overview-page .page-content .charts .current-year .text{
+.overview-page .page-content .charts .current-month .text{
 	width: 100%;
 	height: 10%;
-	border: 1px solid black;
+	border: 1px solid gray;
 }
 
-.overview-page .page-content .charts .current-year .plot-balance{
+.overview-page .page-content .charts .current-month .plot-balance{
 	width: 100%;
 	height: 100%;
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--primary-color-light);
+	border-radius: 10px;
 }
 
-.overview-page .page-content .charts .current-year .plot-balance .plot{
-	width: 70%;
+.overview-page .page-content .charts .current-month .plot-balance .plot {
+	width: 100%;
 	height: 100%;
-	border: 1px solid black;
+	border-radius: 10px;
+}
+
+#balancePlot {
+	width: 100%;
+	height: 100%;
+}
+
+
+.overview-page .page-content .charts .current-month .plot-balance .plot canvas{
+	width: 100%;
+	height: 100%;
 } 
 
-.overview-page .page-content .charts .current-year .plot-balance .balance{
+.overview-page .page-content .charts .current-month .plot-balance .balance{
 	width: 30%;
 	height: 100%;
-	border: 1px solid black;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -477,11 +513,31 @@ body.dark .switch::before{
 	align-items: center;
 } 
 
-.overview-page .page-content .charts .current-year .plot-balance .balance .revenue-year, .expense-year, .summary-year{
+.overview-page .page-content .charts .current-month .plot-balance .balance .revenue-month, .expense-month, .summary-month{
 	width: 60%;
 	height: 25%;
 	border: 1px solid black;
 	border-radius: 10px;
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	align-items: center;
+}
+
+.overview-page .page-content .charts .current-month{
+	font-size: 2.2rem;
+}
+
+.overview-page .page-content .charts .revenue-month{
+	background-color: lightgreen;
+}
+
+.overview-page .page-content .charts .expense-month{
+	background-color: salmon;
+}
+
+.overview-page .page-content .charts .summary-month{
+	background-color: lightyellow;
 }
 
 /* ---- Add revenue page ---- */
@@ -968,27 +1024,23 @@ body.dark .switch::before{
 	background-color: lightcoral;
 }
 
-
-
-
-
-
 /* ---- Analitics page ---- */
 
 .analitics-page{
 	position: fixed;
-	height: 95%;
-	width: 93%;
+	height: 100%;
+	width: 94%;
 	background: var(--body-color);
 	transition: var(--tran-05);
-	margin: 20px 20px 20px 110px;
-	border: 1px solid black;
-	border-radius: 5px;
+	margin: 0px 20px 20px 110px;
+	padding-bottom: 40px;
+	overflow-y: auto;
 }
 
 .analitics-page .page-content{
+	padding-top: 20px;
 	width: 100%;
-	height: 100%;
+	height: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -1000,17 +1052,188 @@ body.dark .switch::before{
 	width: 95%;
 	display: flex; 
 	justify-content: space-between;
-	border: 1px solid black;
-	border-radius: 10px;
+	border: 1px solid grey;
+	border-radius: 15px;
+	background-color :rgb(184, 194, 222);
+}
+
+.analitics-page .page-content .theme h2{
+	padding-left: 20px;
+	font-size: 2rem;
 }
 
 .analitics-page .page-content .analitics-content{
-	border: 1px solid black;
 	width: 95%;
-	height: 90%;
+	height: auto;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.analitics-page .page-content .time-period,
+.analitics-page .page-content .total{
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	display: flex;
+	justify-content: space-between;
+}
+
+
+
+.analitics-page .page-content .header{
+	width: 100%;
+	height: auto;
+	padding: 10px 20px 10px 20px;
+	background-color :rgb(184, 194, 222);
+	border: 1px solid gray;
+	border-radius: 15px;
+}
+
+.analitics-page .page-content .incomes .header{	
+	background-color: lightgreen;
+}
+
+.analitics-page .page-content .expenses .header{	
+	background-color: salmon;
+}
+
+
+.analitics-page .page-content .analitics-content .display{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 	gap: 15px;
+	border: 1px solid black;
+	border-radius: 15px;
+	padding: 10px;
+}
+
+.analitics-page .page-content .analitics-content .total .display{
+	width: 100%;
+	padding-left: 80px;
+	display: flex;
+	justify-content: start;
+	gap: 100px;
+}
+
+.analitics-page .page-content .analitics-content .total .display .date{
+	display: flex;
+	gap: 30px;
+}
+
+.analitics-page .page-content .time-period button{
+	height: 40px;
+	width: 200px;
+	border: 1px solid darkgrey;
+	border-radius: 15px;
+	cursor: pointer;
+	margin-right: 10px;
+	transition: 0.7s ease;
+}
+
+.analitics-page .page-content .time-period input{
+	width: 150px;
+	height: 40px;
+	border: 1px solid darkgrey;
+	border-radius: 15px;
+	cursor: pointer;
+	padding: 10px;
+}
+
+.analitics-page .page-content .analitics-content .incomes,
+.analitics-page .page-content .analitics-content .expenses{
+	width: 100%;
+	height: 100%;
+}
+
+.analitics-page .page-content .analitics-content .incomes .display,
+.analitics-page .page-content .analitics-content .expenses .display{
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+}
+
+.analitics-page .page-content .analitics-content .incomes .listOfIncome,
+.analitics-page .page-content .analitics-content .expenses .listOfExpense{
+	width: 100%;
+	padding: 10px;	
+	border: 1px solid black;
+	border-radius: 15px;
+	list-style-type: none;
+	display: flex;
+}
+
+.analitics-page .page-content .analitics-content .incomes .listOfIncome .name{
+	font-weight: bold;
+	width: 10%;
+	border-right: 1px solid black;
+	text-align: center;
+}
+
+.analitics-page .page-content .analitics-content .incomes .listOfIncome .amountt{
+	width: 10%;
+	border-right: 1px solid black;
+	text-align: center;
+}
+
+.analitics-page .page-content .analitics-content .incomes .listOfIncome .date{
+	width: 10%;
+	border-right: 1px solid black;
+	text-align: center;
+}
+.analitics-page .page-content .analitics-content .incomes .listOfIncome .commentt {
+	width: 65%;
+	border-right: 1px solid black;
+	text-align: center;
+}
+
+.analitics-page .page-content .analitics-content .incomes .listOfIncome .edit {
+	width: 5%;
+	text-align: center;
+}
+
+.analitics-page .page-content .analitics-content .expenses .listOfExpense .name{
+	font-weight: bold;
+	width: 10%;
+	border-right: 1px solid black;
+	text-align: center;
+}
+
+.analitics-page .page-content .analitics-content .expenses .listOfExpense .amountt{
+	width: 10%;
+	border-right: 1px solid black;
+	text-align: center;
+}
+
+.analitics-page .page-content .analitics-content .expenses .listOfExpense .paymetMethod{
+	width: 10%;
+	border-right: 1px solid black;
+	text-align: center;
+}
+
+.analitics-page .page-content .analitics-content .expenses .listOfExpense .date{
+	width: 10%;
+	border-right: 1px solid black;
+	text-align: center;
+}
+.analitics-page .page-content .analitics-content .expenses .listOfExpense .commentt {
+	width: 55%;
+	border-right: 1px solid black;
+	text-align: center;
+}
+
+.analitics-page .page-content .analitics-content .expenses .listOfExpense .edit {
+	width: 5%;
+	text-align: center;
+}
+
+.analitics-page .edit:hover{
+	cursor: pointer;
 }
